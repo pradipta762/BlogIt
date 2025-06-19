@@ -1,13 +1,13 @@
 class CreatePosts < ActiveRecord::Migration[7.1]
   def change
-    create_table :posts do |t|
-      t.string :title, null: false
-      t.text :description, null: false
-      t.integer :upvotes, null: false, default: 0
-      t.integer :downvotes, null: false, default: 0
-      t.boolean :is_bloggable, default: false
+    create_table :posts do |p|
+      p.string :title, null: false
+      p.text :description, null: false
+      p.integer :upvotes, null: false, default: 0
+      p.integer :downvotes, null: false, default: 0
+      p.boolean :is_bloggable, default: false
 
-      t.timestamps
+      p.timestamps
     end
   end
 end
