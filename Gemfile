@@ -18,6 +18,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 gem "bootsnap", require: false
 
+gem 'react-rails', "~> 2.7.1"
+
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
 end
