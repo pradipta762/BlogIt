@@ -15,6 +15,8 @@ const alias = {
   common: absolutePath("src/common"),
   components: absolutePath("src/components"),
   assets: absolutePath("../assets"),
+  neetoui: "@bigbinary/neetoui",
+  neetoicons: "@bigbinary/neeto-icons",
 };
 
 export { alias };
