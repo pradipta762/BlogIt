@@ -1,5 +1,13 @@
 import React from "react";
 
-const Lists = () => <div>This is product list</div>;
+import Card from "./Card";
+
+const Lists = ({ posts }) => (
+  <div className="flex flex-col space-y-4">
+    {posts.map(({ id, title, description, created_at }) => (
+      <Card key={id} {...{ title, description, created_at }} />
+    ))}
+  </div>
+);
 
 export default Lists;
