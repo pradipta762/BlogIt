@@ -37,7 +37,7 @@ const Dashboard = () => {
 
   if (either(isNil, isEmpty)(posts)) {
     return (
-      <Container>
+      <Container className="flex min-h-screen w-full items-center justify-center">
         <h1 className="my-5 text-center text-xl leading-5">
           You have not posted any blogs.
         </h1>
@@ -46,11 +46,9 @@ const Dashboard = () => {
   }
 
   return (
-    <Container>
-      <div>
-        <PageTitle title="Blog It" />
-        <Lists />
-      </div>
+    <Container className="flex flex-col space-y-4">
+      <PageTitle title="Blog posts" />
+      <Lists {...{ posts }} className="w-full flex-1" />
     </Container>
   );
 };

@@ -6,11 +6,10 @@ import PropTypes from "prop-types";
 import Sidebar from "../Sidebar";
 
 const Container = ({ children, className = "" }) => (
-  <Sidebar>
-    <div className={classnames("mx-auto max-w-6xl px-6", [className])}>
-      {children}
-    </div>
-  </Sidebar>
+  <div className="flex">
+    <Sidebar />
+    <div className={classnames("max-w-6xl px-6", [className])}>{children}</div>
+  </div>
 );
 
 Container.propTypes = {
