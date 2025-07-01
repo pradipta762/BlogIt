@@ -3,7 +3,7 @@ import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
-import Sidebar from "../Sidebar";
+import Sidebar from "../SideNavBar";
 
 const Container = ({ children, className = "" }) => (
   <div className="flex">

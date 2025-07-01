@@ -1,9 +1,10 @@
 import React from "react";
 
 import { Book } from "@bigbinary/neeto-icons";
-import { Avatar } from "@bigbinary/neetoui";
 import classNames from "classnames";
 import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
+
+import UserProfile from "./UserProfile";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -30,15 +31,7 @@ const Sidebar = () => {
             </Link>
           </div>
         </div>
-        <div>
-          <Avatar
-            className="bg-purple-400"
-            size="large"
-            user={{
-              name: "Pradipta Dash",
-            }}
-          />
-        </div>
+        <UserProfile />
       </div>
     </aside>
   );
