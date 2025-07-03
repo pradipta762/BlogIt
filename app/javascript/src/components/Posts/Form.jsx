@@ -19,7 +19,10 @@ const Form = ({
   };
 
   return (
-    <form className="mb-4 w-full" onSubmit={handleSubmit}>
+    <form
+      className="flex min-h-[600px] w-full flex-col justify-between rounded-xl border px-10 py-8 shadow-sm"
+      onSubmit={handleSubmit}
+    >
       <div className="space-y-3">
         <Input
           required
@@ -37,6 +40,7 @@ const Form = ({
           label="Description"
           maxLength={MAX_DESCRIPTION_LENGTH}
           placeholder="Description (Max 10000 characters allowed)"
+          rows="10"
           value={description}
           onBlur={({ target: { value } }) => setDescription(value.trim())}
           onChange={({ target: { value } }) =>
@@ -44,11 +48,11 @@ const Form = ({
           }
         />
       </div>
-      <div className="mt-4 space-x-3">
+      <div className="mt-6 flex justify-end space-x-3">
         <Button label="Cancel" style="secondary" onClick={handleCancel} />
         <Button
-          className="bg-slate-700 hover:bg-slate-800"
-          label="Create"
+          className="bg-indigo-700 hover:bg-indigo-800"
+          label="Submit"
           loading={loading}
           type="submit"
         />

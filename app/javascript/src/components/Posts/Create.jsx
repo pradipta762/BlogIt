@@ -7,7 +7,7 @@ import Form from "./Form";
 
 import postsApi from "../../apis/posts";
 
-const CreateTask = ({ history }) => {
+const CreatePost = ({ history }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
@@ -28,7 +28,7 @@ const CreateTask = ({ history }) => {
   return (
     <Container className="w-full">
       <div className="flex flex-col gap-y-8">
-        <PageTitle title="Add new blog" />
+        <PageTitle title="New blog post" />
         <Form
           {...{
             title,
@@ -44,4 +44,4 @@ const CreateTask = ({ history }) => {
   );
 };
 
-export default CreateTask;
+export default CreatePost;
