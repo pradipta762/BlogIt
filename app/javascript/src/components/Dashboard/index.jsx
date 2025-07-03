@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import { Spinner } from "neetoui";
+import { Button } from "@bigbinary/neetoui";
 import { isNil, isEmpty, either } from "ramda";
 
 import postsApi from "../../apis/posts";
-import { Container, PageTitle } from "../commons";
+import { Container, PageLoader, PageTitle } from "../commons";
 import Lists from "../Posts/Lists";
 
 const Dashboard = () => {
@@ -28,11 +28,7 @@ const Dashboard = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="h-screen w-screen">
-        <Spinner />
-      </div>
-    );
+    return <PageLoader />;
   }
 
   if (either(isNil, isEmpty)(posts)) {
@@ -47,7 +43,14 @@ const Dashboard = () => {
 
   return (
     <Container className="flex flex-col space-y-4">
-      <PageTitle title="Blog posts" />
+      <div className="flex items-end justify-between">
+        <PageTitle title="Blog posts" />
+        <Button
+          className="bg-indigo-600 hover:bg-indigo-800"
+          label="Add a new post"
+          to="posts/create"
+        />
+      </div>
       <Lists {...{ posts }} className="w-full flex-1" />
     </Container>
   );
