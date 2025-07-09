@@ -22,6 +22,8 @@ gem "bootsnap", require: false
 
 gem "react-rails", "~> 2.7.1"
 
+gem "bcrypt", "~> 3.1.7"
+
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
 
