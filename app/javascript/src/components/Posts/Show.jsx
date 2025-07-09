@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 
+import postsApi from "apis/posts";
 import Logger from "js-logger";
 import {
   useHistory,
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
 
-import postsApi from "../../apis/posts";
+import routes from "../../routes";
 import { Container, PageLoader } from "../commons";
 
 const ShowPost = () => {
@@ -24,7 +25,7 @@ const ShowPost = () => {
       setPageLoading(false);
     } catch (error) {
       Logger.error(error);
-      history.push("/");
+      history.push(routes.root);
     }
   };
 

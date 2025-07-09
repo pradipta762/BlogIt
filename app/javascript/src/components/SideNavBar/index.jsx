@@ -6,6 +6,8 @@ import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 import UserProfile from "./UserProfile";
 
+import routes from "../../routes";
+
 const Sidebar = () => {
   const location = useLocation();
 
@@ -14,24 +16,24 @@ const Sidebar = () => {
       <div className="flex h-full flex-col justify-between px-4 py-8">
         <div className="flex flex-col space-y-4">
           <Link
-            to="/dashboard"
+            to={routes.dashboard}
             className={classNames(
               "flex items-center justify-center rounded-lg bg-slate-100 p-2 text-gray-600 transition-colors hover:bg-slate-200",
               {
                 "bg-indigo-200 text-indigo-800":
-                  location.pathname === "/dashboard",
+                  location.pathname === routes.dashboard,
               }
             )}
           >
             <Book size={20} />
           </Link>
           <Link
-            to="/posts/create"
+            to={routes.posts.create}
             className={classNames(
               "flex items-center justify-center rounded-lg bg-slate-100 p-2 text-gray-600 transition-colors hover:bg-slate-200",
               {
                 "bg-indigo-200 text-indigo-800":
-                  location.pathname === "/posts/create",
+                  location.pathname === routes.posts.create,
               }
             )}
           >

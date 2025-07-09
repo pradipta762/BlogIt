@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
+import postsApi from "apis/posts";
 import { Container, PageTitle } from "components/commons";
 import Logger from "js-logger";
 
 import Form from "./Form";
 
-import postsApi from "../../apis/posts";
+import routes from "../../routes";
 
 const CreatePost = ({ history }) => {
   const [title, setTitle] = useState("");
@@ -18,7 +19,7 @@ const CreatePost = ({ history }) => {
     try {
       await postsApi.create({ title, description });
       setLoading(false);
-      history.push("/dashboard");
+      history.push(routes.dashboard);
     } catch (error) {
       Logger.error(error);
       setLoading(false);

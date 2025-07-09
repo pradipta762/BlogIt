@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import { MAX_DESCRIPTION_LENGTH, MAX_TITLE_LENGTH } from "./constants";
 
+import routes from "../../routes";
+
 const Form = ({
   title,
   setTitle,
@@ -15,7 +17,7 @@ const Form = ({
 }) => {
   const history = useHistory();
   const handleCancel = () => {
-    history.push("/dashboard");
+    history.push(routes.dashboard);
   };
 
   return (
