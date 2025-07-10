@@ -967,10 +967,10 @@
     "@babel/helper-string-parser" "^7.27.1"
     "@babel/helper-validator-identifier" "^7.27.1"
 
-"@bigbinary/neeto-cist@1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@bigbinary/neeto-cist/-/neeto-cist-1.0.6.tgz#cf9e34910a765e6cb946503c0bf7ab1632ef8e17"
-  integrity sha512-UebvniTSUyNYOIZMiNSDpV4HqHtwvYfaUaE3+C4ZBSY44csUCRgwOeD0njU3rQpE5eAL+e6KYsV9moRz4/uc0g==
+"@bigbinary/neeto-cist@^1.0.17":
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/@bigbinary/neeto-cist/-/neeto-cist-1.0.17.tgz#bcdedc78825a1bbbe462ea14ffd74642c956362f"
+  integrity sha512-A0SgQFZYZKLyj6ygnc/yU1UST7PSAC6Qg44guOzyFnwmc3ZqvBBETXNkYxctg7A54nfpE67MQaF3iNovX2vnZw==
 
 "@bigbinary/neeto-commons-frontend@latest":
   version "4.13.43"
@@ -994,10 +994,10 @@
   resolved "https://registry.yarnpkg.com/@bigbinary/neeto-hotkeys/-/neeto-hotkeys-1.0.4.tgz#03358c7eb27c430b69d8bf786a4a278fdf7a280f"
   integrity sha512-/DEbXYPeg/Pbljd/k2GhRvCaDEpQG2JTnSWz0soSlw5m6VkPY7NdC0PR+PIwvHFZUjGtRU7liSBZoWPTleTtHA==
 
-"@bigbinary/neeto-icons@1.17.6":
-  version "1.17.6"
-  resolved "https://registry.yarnpkg.com/@bigbinary/neeto-icons/-/neeto-icons-1.17.6.tgz#6e409b70a5056dd95e1b10ae2030566333826595"
-  integrity sha512-D+1o+r73sjV1kZNswMX96gPScrz5hhKCji7Xr+IngLTfJhV1AqXyYms7k0pUm59wOHfqx6eUeVsbPP+l1st7Yg==
+"@bigbinary/neeto-icons@^1.20.53":
+  version "1.20.53"
+  resolved "https://registry.yarnpkg.com/@bigbinary/neeto-icons/-/neeto-icons-1.20.53.tgz#a9d198b2ed07d3186f24e6c54b4fdc6ad45c5b1c"
+  integrity sha512-fkMod07z9iqnDak2H7fSzOwBpN+p3TJVQL/4V+2pVOcHG29X17UUTKaaq9buo4bR0unaCHT3KUy4aFAj6NUBhw==
 
 "@bigbinary/neetoui@5.2.41":
   version "5.2.41"

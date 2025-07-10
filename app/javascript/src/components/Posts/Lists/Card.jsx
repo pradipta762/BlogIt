@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Typography } from "@bigbinary/neetoui";
-import Logger from "js-logger";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import List from "../Categories/List";
@@ -9,7 +8,6 @@ import { formatDate } from "../utils";
 
 const Card = ({ title, user, categories, created_at, slug }) => {
   const formattedDate = formatDate(created_at);
-  Logger.info(user, categories);
 
   return (
     <div className="w-full border-b border-gray-200 py-5">
