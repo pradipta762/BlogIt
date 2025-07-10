@@ -7,15 +7,15 @@ json.post do
     :description,
     :created_at,
     :updated_at
-end
 
-json.user do
-  json.extract! @user,
-    :id,
-    :name,
-    :email
-end
+  json.user do
+    json.extract! @post.user,
+      :id,
+      :name,
+      :email
+  end
 
-json.categories @post.categories do |category|
-  json.extract! category, :id, :name
+  json.categories @post.categories do |category|
+    json.extract! category, :id, :name
+  end
 end

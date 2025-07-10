@@ -103,6 +103,7 @@
     "react-time-picker": "6.5.2",
     "react-toastify": "9.0.1",
     "react_ujs": "3.1.1",
+    "react-query": "3",
     "remixicon": "^4.6.0",
     "sass": "^1.59.3",
     "stream-browserify": "^3.0.0",

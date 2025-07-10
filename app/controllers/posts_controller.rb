@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    render
+    render :show
   end
 
   private

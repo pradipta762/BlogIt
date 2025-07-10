@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import postsApi from "apis/posts";
+import { Container, PageLoader } from "components/commons";
+import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
 import {
   useHistory,
@@ -8,32 +9,19 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 
 import routes from "../../routes";
-import { Container, PageLoader } from "../commons";
 
 const ShowPost = () => {
-  const [post, setPost] = useState([]);
-  const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
   const history = useHistory();
 
-  const fetchPostDetails = async () => {
-    try {
-      const {
-        data: { post },
-      } = await postsApi.show(slug);
-      setPost(post);
-      setPageLoading(false);
-    } catch (error) {
-      Logger.error(error);
-      history.push(routes.root);
-    }
-  };
+  const { data: post, isLoading, error } = useShowPost(slug);
 
-  useEffect(() => {
-    fetchPostDetails();
-  }, []);
+  if (error) {
+    Logger.error(error);
+    history.push(routes.root);
+  }
 
-  if (pageLoading) {
+  if (isLoading) {
     return <PageLoader />;
   }
 

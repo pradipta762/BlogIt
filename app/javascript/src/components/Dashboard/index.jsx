@@ -1,33 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { Button } from "@bigbinary/neetoui";
+import { useFetchPosts } from "hooks/reactQuery/usePostsApi";
 import { isNil, isEmpty, either } from "ramda";
 
-import postsApi from "../../apis/posts";
 import { Container, PageLoader, PageTitle } from "../commons";
 import Lists from "../Posts/Lists";
 
 const Dashboard = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const fetchPosts = async () => {
-    try {
-      const {
-        data: { posts },
-      } = await postsApi.fetch();
-      setPosts(posts);
-      setLoading(false);
-    } catch (error) {
-      logger.error(error);
-      setLoading(false);
-    }
-  };
+  const { data: posts, isLoading } = useFetchPosts();
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return <PageLoader />;
   }
 
