@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   def create
     post = Post.new(post_params)
     post.save!
-    render_notice(t("successfully_created"))
+    render_notice(t("successfully_created", entity: "Task"))
   end
 
   def show
@@ -25,6 +25,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :description)
+      params.require(:post).permit(:title, :description, category_ids: [])
     end
 end
