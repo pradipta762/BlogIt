@@ -7,8 +7,8 @@ class AddUserAndOrganizationToPosts < ActiveRecord::Migration[7.1]
 
     default_organization = Organization.first || Organization.create!(name: "PixelCompute")
 
-    default_user = User.find_or_create_by!(email: "guest@example.com") do |user|
-      user.name = "Guest"
+    default_user = User.find_or_create_by!(email: "pradipta@example.com") do |user|
+      user.name = "Pradipta Dash"
       user.password = "welcome"
       user.password_confirmation = "welcome"
       user.organization = default_organization

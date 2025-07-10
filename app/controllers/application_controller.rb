@@ -61,4 +61,12 @@ class ApplicationController < ActionController::Base
   def render_json(json = {}, status = :ok)
     render status:, json:
   end
+
+  def default_user
+    User.find_by!(email: "pradipta@example.com")
+  end
+
+  def default_organization
+    Organization.find_by!(name: "PixelCompute")
+  end
 end

@@ -25,8 +25,8 @@ const Dashboard = () => {
   }
 
   return (
-    <Container className="flex flex-col space-y-4">
-      <div className="flex items-end justify-between">
+    <Container className="flex w-full flex-col space-y-4">
+      <div className="flex w-full items-end justify-between">
         <PageTitle title="Blog posts" />
         <Button
           className="bg-indigo-600 hover:bg-indigo-800"

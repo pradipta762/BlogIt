@@ -4,12 +4,14 @@ class PostsController < ApplicationController
   before_action :load_post!, only: %i[show]
 
   def index
-    posts = Post.all
-    render_json({ posts: })
+    @posts = Post.includes(:user, :categories).all
+    render :index
   end
 
   def create
     post = Post.new(post_params)
+    post.user = current_user
+    post.organization = current_organization
     post.save!
     render_notice(t("successfully_created", entity: "Task"))
   end
@@ -25,6 +27,14 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :description, category_ids: [])
+      params.require(:post).permit(:title, :description, :user_id, :organization_id, category_ids: [])
+    end
+
+    def current_user
+      default_user
+    end
+
+    def current_organization
+      default_organization
     end
 end
