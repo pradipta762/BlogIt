@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.all
-    render status: :ok, json: { posts: }
+    render_json({ posts: })
   end
 
   def create
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    render_json({ post: @post })
+    render
   end
 
   private
