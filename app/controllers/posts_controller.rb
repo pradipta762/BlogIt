@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.includes(:user, :categories, :organization)
+      .where(organization_id: current_organization.id)
       .order(created_at: :desc)
       .page(params[:page]&.to_i || DEFAULT_PAGE_NUMBER)
       .per(DEFAULT_PAGE_SIZE)

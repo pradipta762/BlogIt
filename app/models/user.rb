@@ -6,7 +6,7 @@ class User < ApplicationRecord
   MAX_EMAIL_LENGTH = 255
   MIN_PASSWORD_LENGTH = 6
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
   belongs_to :organization
 
   has_secure_password
