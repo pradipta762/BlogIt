@@ -17,7 +17,7 @@ const CategoryPane = () => {
 
   return (
     <>
-      <aside className="sticky left-full top-0 z-20 h-screen w-72 border-r border-gray-200 bg-gray-100 shadow-sm">
+      <aside className="sticky left-full top-0 z-10 h-screen w-72 border-r border-gray-200 bg-gray-100 shadow-sm">
         <div className="flex h-full flex-col space-y-5 px-4 pb-8 pt-12">
           <div className="flex items-center justify-between">
             <Typography className="font-semibold uppercase" style="h3">

@@ -1,25 +1,73 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import { Avatar, Popover, Typography } from "@bigbinary/neetoui";
+import { LeftArrow } from "@bigbinary/neeto-icons";
+import { Avatar, Typography, Button } from "@bigbinary/neetoui";
 import { getFromLocalStorage } from "utils/storage";
 
-const UserProfile = () => {
+const UserProfile = ({ handleLogout, name, email }) => {
   const userName = getFromLocalStorage("authUserName");
-  const ref = useRef(null);
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const menuRef = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
+
+  const toggleMenu = () => {
+    setIsMenuVisible(!isMenuVisible);
+  };
 
   return (
-    <div>
+    <div className="relative">
       <Avatar
-        ref={ref}
+        showTooltip
+        className="cursor-pointer"
+        ref={menuRef}
         size="large"
         user={{
           imageUrl: "https://avatars.githubusercontent.com/u/116185668?v=4",
           name: userName,
         }}
+        onClick={toggleMenu}
       />
-      <Popover reference={ref}>
-        <Typography>{userName}</Typography>
-      </Popover>
+      {isMenuVisible && (
+        <div className="absolute -top-12 left-full z-[999] ml-5 rounded-md border border-gray-300 bg-white p-3 py-1 shadow-xl">
+          <div className="flex items-center space-x-3 border-b p-2">
+            <Avatar
+              size="medium"
+              user={{
+                imageUrl:
+                  "https://avatars.githubusercontent.com/u/116185668?v=4",
+                name: userName,
+              }}
+            />
+            <div>
+              <Typography className="font-semibold">{name}</Typography>
+              <Typography className="text-xs text-gray-400">{email}</Typography>
+            </div>
+          </div>
+          <Button
+            fullWidth
+            className="flex p-3 text-gray-800"
+            icon={LeftArrow}
+            iconPosition="left"
+            label="Log out"
+            size="large"
+            style="text"
+            onClick={handleLogout}
+          />
+        </div>
+      )}
     </div>
   );
 };
