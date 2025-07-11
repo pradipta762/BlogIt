@@ -2,23 +2,24 @@ import React from "react";
 
 import classNames from "classnames";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
-import Logger from "js-logger";
 import useCategoryStore from "stores/useCategoryStore";
 
-const List = () => {
+const List = ({ searchTerm }) => {
   const { data: categories = [] } = useFetchCategories();
 
-  const { toggleSelect, isSelectedCategory, selectedCategory } =
-    useCategoryStore();
+  const { toggleSelect, isSelectedCategory } = useCategoryStore();
 
   const handleCategorySelect = category => {
     toggleSelect(category);
-    Logger.info(selectedCategory);
   };
+
+  const filteredCategories = categories.filter(category =>
+    category.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <ul className="mt-4 flex flex-col space-y-2">
-      {categories.map(category => (
+      {filteredCategories.map(category => (
         <li
           key={category.id}
           className={classNames(

@@ -38,7 +38,7 @@ const CategoryPane = () => {
           </div>
           {showSearchField && (
             <Input
-              className="flex-grow-0 bg-transparent px-4"
+              className="flex-grow-0 bg-transparent"
               placeholder="Search category"
               size="medium"
               value={searchTerm}

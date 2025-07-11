@@ -2,13 +2,24 @@ import React from "react";
 
 import { Button } from "@bigbinary/neetoui";
 import { useFetchPosts } from "hooks/reactQuery/usePostsApi";
-import { isNil, isEmpty, either } from "ramda";
+import { isNil, isEmpty, either, includes } from "ramda";
+import useCategoryStore from "stores/useCategoryStore";
 
 import { Container, PageLoader, PageTitle } from "../commons";
 import Lists from "../Posts/Lists";
 
 const Dashboard = () => {
   const { data: posts, isLoading } = useFetchPosts();
+
+  const { selectedCategory } = useCategoryStore();
+
+  const selectedCategoryIds = selectedCategory.map(category => category.id);
+
+  const filteredPosts = !isEmpty(selectedCategory)
+    ? posts.filter(({ categories }) =>
+        categories.some(category => includes(category.id, selectedCategoryIds))
+      )
+    : posts;
 
   if (isLoading) {
     return <PageLoader />;
@@ -34,7 +45,7 @@ const Dashboard = () => {
           to="posts/create"
         />
       </div>
-      <Lists {...{ posts }} className="w-full flex-1" />
+      <Lists {...{ filteredPosts }} className="w-full flex-1" />
     </Container>
   );
 };
