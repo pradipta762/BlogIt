@@ -1,13 +1,17 @@
 import React from "react";
 
-import { Button, Input, Textarea } from "@bigbinary/neetoui";
+import { Button, Input, Select, Textarea } from "@bigbinary/neetoui";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import { MAX_DESCRIPTION_LENGTH, MAX_TITLE_LENGTH } from "./constants";
 
+import routes from "../../routes";
+
 const Form = ({
+  categoryOptions,
   title,
   setTitle,
+  setSelectedCategories,
   description,
   setDescription,
   loading,
@@ -15,7 +19,7 @@ const Form = ({
 }) => {
   const history = useHistory();
   const handleCancel = () => {
-    history.push("/dashboard");
+    history.push(routes.dashboard);
   };
 
   return (
@@ -33,6 +37,17 @@ const Form = ({
           onBlur={({ target: { value } }) => setTitle(value.trim())}
           onChange={({ target: { value } }) =>
             setTitle(value.slice(0, MAX_TITLE_LENGTH))
+          }
+        />
+        <Select
+          isMulti
+          isSearchable
+          required
+          label="Category"
+          options={categoryOptions}
+          placeholder="Search category"
+          onChange={selectedOptions =>
+            setSelectedCategories(selectedOptions.map(option => option.value))
           }
         />
         <Textarea

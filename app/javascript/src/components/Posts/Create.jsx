@@ -1,28 +1,45 @@
 import React, { useState } from "react";
 
 import { Container, PageTitle } from "components/commons";
+import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
+import { useCreatePost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
 
 import Form from "./Form";
+import { makeCategoryOptions } from "./utils";
 
-import postsApi from "../../apis/posts";
+import routes from "../../routes";
 
 const CreatePost = ({ history }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const handleSubmit = async event => {
+  const { mutate: createPost, isLoading } = useCreatePost();
+  const { data: categories } = useFetchCategories();
+
+  const categoryOptions = makeCategoryOptions(categories);
+
+  const handleSubmit = event => {
     event.preventDefault();
-    setLoading(true);
-    try {
-      await postsApi.create({ title, description });
-      setLoading(false);
-      history.push("/dashboard");
-    } catch (error) {
-      Logger.error(error);
-      setLoading(false);
-    }
+
+    createPost(
+      {
+        title,
+        description,
+        user_id: 1,
+        organization_id: 1,
+        category_ids: selectedCategories,
+      },
+      {
+        onSuccess: () => {
+          history.push(routes.dashboard);
+        },
+        onError: error => {
+          Logger.error(error);
+        },
+      }
+    );
   };
 
   return (
@@ -31,11 +48,13 @@ const CreatePost = ({ history }) => {
         <PageTitle title="New blog post" />
         <Form
           {...{
+            categoryOptions,
             title,
             setTitle,
             description,
             setDescription,
-            loading,
+            setSelectedCategories,
+            isLoading,
             handleSubmit,
           }}
         />

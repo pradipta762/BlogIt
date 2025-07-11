@@ -1,21 +1,29 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+  DEFAULT_PAGE_SIZE = 4
+  DEFAULT_PAGE_NUMBER = 1
+
   before_action :load_post!, only: %i[show]
 
   def index
-    posts = Post.all
-    render status: :ok, json: { posts: }
+    @posts = Post.includes(:user, :categories, :organization)
+      .order(created_at: :desc)
+      .page(params[:page]&.to_i || DEFAULT_PAGE_NUMBER)
+      .per(DEFAULT_PAGE_SIZE)
+    render :index
   end
 
   def create
     post = Post.new(post_params)
+    post.user = current_user
+    post.organization = current_organization
     post.save!
-    render_notice(t("successfully_created"))
+    render_notice(t("successfully_created", entity: "Task"))
   end
 
   def show
-    render_json({ post: @post })
+    render :show
   end
 
   private
@@ -25,6 +33,14 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :description)
+      params.require(:post).permit(:title, :description, :user_id, :organization_id, category_ids: [])
+    end
+
+    def current_user
+      default_user
+    end
+
+    def current_organization
+      default_organization
     end
 end
