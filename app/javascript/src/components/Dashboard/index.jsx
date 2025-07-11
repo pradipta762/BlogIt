@@ -1,51 +1,83 @@
 import React from "react";
 
-import { Button } from "@bigbinary/neetoui";
+import { Button, Pagination, Typography } from "@bigbinary/neetoui";
 import { useFetchPosts } from "hooks/reactQuery/usePostsApi";
-import { isNil, isEmpty, either, includes } from "ramda";
+import useQueryParams from "hooks/useQueryParams";
+import { isEmpty, includes } from "ramda";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useCategoryStore from "stores/useCategoryStore";
+import { buildUrl } from "utils/url";
 
+import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from "./constants";
+
+import routes from "../../routes";
 import { Container, PageLoader, PageTitle } from "../commons";
 import Lists from "../Posts/Lists";
 
 const Dashboard = () => {
-  const { data: posts, isLoading } = useFetchPosts();
+  const history = useHistory();
+
+  const { page } = useQueryParams();
+
+  const currentPage = Number(page) || DEFAULT_PAGE_NUMBER;
+
+  const { data, isLoading } = useFetchPosts(currentPage);
+
+  const posts = data?.posts || [];
+  const meta = data?.meta || {};
 
   const { selectedCategory } = useCategoryStore();
 
-  const selectedCategoryIds = selectedCategory.map(category => category.id);
+  const selectedCategoryIds = selectedCategory.map(c => c.id);
 
-  const filteredPosts = !isEmpty(selectedCategory)
-    ? posts.filter(({ categories }) =>
+  const filteredPosts = isEmpty(selectedCategory)
+    ? posts
+    : posts.filter(({ categories }) =>
         categories.some(category => includes(category.id, selectedCategoryIds))
-      )
-    : posts;
+      );
 
-  if (isLoading) {
-    return <PageLoader />;
-  }
+  const handlePageNavigation = newPage => {
+    if (newPage === 1) history.replace(routes.dashboard);
+    history.replace(buildUrl(routes.dashboard, { page: newPage }));
+  };
 
-  if (either(isNil, isEmpty)(posts)) {
+  if (isEmpty(posts)) {
     return (
-      <Container className="flex min-h-screen w-full items-center justify-center">
-        <h1 className="my-5 text-center text-xl leading-5">
+      <Container className="flex min-h-screen items-center justify-center">
+        <Typography className="text-center text-xl font-medium text-gray-600">
           You have not posted any blogs.
-        </h1>
+        </Typography>
       </Container>
     );
   }
 
   return (
-    <Container className="flex w-full flex-col space-y-4">
-      <div className="flex w-full items-end justify-between">
-        <PageTitle title="Blog posts" />
-        <Button
-          className="bg-indigo-600 hover:bg-indigo-800"
-          label="Add a new post"
-          to="posts/create"
-        />
+    <Container className="flex min-h-screen w-full flex-col justify-between space-y-4">
+      <div className="flex w-full flex-col space-y-4">
+        <div className="flex w-full items-center justify-between">
+          <PageTitle title="Blog posts" />
+          <Button
+            className="bg-indigo-600 hover:bg-indigo-800"
+            label="Add a new post"
+            to={routes.posts.create}
+          />
+        </div>
+        {isLoading ? (
+          <PageLoader />
+        ) : (
+          <Lists {...{ filteredPosts }} className="w-full flex-1" />
+        )}
       </div>
-      <Lists {...{ filteredPosts }} className="w-full flex-1" />
+      {meta.total_pages > 1 && (
+        <div className="flex justify-end">
+          <Pagination
+            count={meta.total_count}
+            navigate={handlePageNavigation}
+            pageNo={meta.current_page || currentPage}
+            pageSize={DEFAULT_PAGE_SIZE}
+          />
+        </div>
+      )}
     </Container>
   );
 };

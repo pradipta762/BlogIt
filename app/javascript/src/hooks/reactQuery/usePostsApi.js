@@ -3,16 +3,15 @@ import { QUERY_KEYS } from "constants/query";
 import postsApi from "apis/posts";
 import { useMutation, useQuery } from "react-query";
 
-export const useFetchPosts = () =>
+export const useFetchPosts = page =>
   useQuery({
-    queryKey: [QUERY_KEYS.POST],
+    queryKey: [QUERY_KEYS.POST, page],
     queryFn: async () => {
-      const {
-        data: { posts },
-      } = await postsApi.fetch();
+      const { data } = await postsApi.fetch({ page });
 
-      return posts;
+      return data;
     },
+    keepPreviousData: true,
   });
 
 export const useShowPost = slug =>

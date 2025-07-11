@@ -10,7 +10,7 @@ const Card = ({ title, user, categories, created_at, slug }) => {
   const formattedDate = formatDate(created_at);
 
   return (
-    <div className="w-full border-b border-gray-200 py-5">
+    <div className="w-full border-b border-gray-200 py-3">
       <Link to={`posts/${slug}/show`}>
         <Typography
           className="mb-3 w-max border-b-2 border-white text-xl font-semibold transition delay-150 hover:border-indigo-100"

@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+  DEFAULT_PAGE_SIZE = 4
+  DEFAULT_PAGE_NUMBER = 1
+
   before_action :load_post!, only: %i[show]
 
   def index
-    @posts = Post.includes(:user, :categories).all
+    @posts = Post.includes(:user, :categories, :organization)
+      .order(created_at: :desc)
+      .page(params[:page]&.to_i || DEFAULT_PAGE_NUMBER)
+      .per(DEFAULT_PAGE_SIZE)
     render :index
   end
 

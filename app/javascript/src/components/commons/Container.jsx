@@ -6,9 +6,13 @@ import PropTypes from "prop-types";
 import Sidebar from "../SideNavBar";
 
 const Container = ({ children, className = "" }) => (
-  <div className="flex">
+  <div className="flex h-screen overflow-hidden">
     <Sidebar />
-    <div className={classnames("max-w-6xl px-6", [className])}>{children}</div>
+    <div
+      className={classnames("flex-1 overflow-y-hidden px-6 py-10", [className])}
+    >
+      {children}
+    </div>
   </div>
 );
 
