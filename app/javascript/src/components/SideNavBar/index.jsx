@@ -7,7 +7,11 @@ import {
   ListDetails,
 } from "@bigbinary/neeto-icons";
 import { Button } from "@bigbinary/neetoui";
+import authApi from "apis/auth";
+import { resetAuthTokens } from "apis/axios";
 import classNames from "classnames";
+import Logger from "js-logger";
+import { getFromLocalStorage, setToLocalStorage } from "utils/storage";
 
 import CategoryPane from "./Category";
 import Item from "./Item";
@@ -18,6 +22,24 @@ import routes from "../../routes";
 const Sidebar = () => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const toggleCategoriesOpen = () => setIsCategoriesOpen(prev => !prev);
+  const name = getFromLocalStorage("authUserName");
+  const email = getFromLocalStorage("authEmail");
+
+  const handleLogout = async () => {
+    try {
+      await authApi.logout();
+      setToLocalStorage({
+        authToken: null,
+        email: null,
+        userId: null,
+        userName: null,
+      });
+      resetAuthTokens();
+      window.location.href = routes.auth.login;
+    } catch (error) {
+      Logger.error(error);
+    }
+  };
 
   return (
     <div className="flex h-screen items-center justify-between">
@@ -46,7 +68,7 @@ const Sidebar = () => {
               onClick={toggleCategoriesOpen}
             />
           </div>
-          <UserProfile />
+          <UserProfile {...{ handleLogout, name, email }} />
         </div>
       </aside>
       {isCategoriesOpen && <CategoryPane {...{ toggleCategoriesOpen }} />}

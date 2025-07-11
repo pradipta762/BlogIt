@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.includes(:user, :categories, :organization)
+      .where(organization_id: current_organization.id)
       .order(created_at: :desc)
       .page(params[:page]&.to_i || DEFAULT_PAGE_NUMBER)
       .per(DEFAULT_PAGE_SIZE)
@@ -34,13 +35,5 @@ class PostsController < ApplicationController
 
     def post_params
       params.require(:post).permit(:title, :description, :user_id, :organization_id, category_ids: [])
-    end
-
-    def current_user
-      default_user
-    end
-
-    def current_organization
-      default_organization
     end
 end
