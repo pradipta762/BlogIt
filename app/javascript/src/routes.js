@@ -7,6 +7,7 @@ const routes = {
   },
   auth: {
     signup: "/signup",
+    login: "/login",
   },
 };
 

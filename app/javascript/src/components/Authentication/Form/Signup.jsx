@@ -31,17 +31,17 @@ const Signup = ({
     >
       <div className="w-full max-w-md">
         <Typography
+          style="h2"
           className="mt-6 text-center text-3xl font-extrabold
-        leading-9 text-gray-700"
+        leading-9 text-gray-800"
         >
           Sign Up
         </Typography>
         <div className="text-center">
           <Link
-            to={routes.dashboard}
-            className="text-bb-purple mt-2 text-center text-sm
-            font-medium transition duration-150 ease-in-out
-            focus:underline focus:outline-none"
+            to={routes.auth.login}
+            className="mt-2 text-center text-sm font-medium
+            text-indigo-600 "
           >
             Or Login Now
           </Link>
@@ -82,7 +82,7 @@ const Signup = ({
             onChange={e => setPasswordConfirmation(e.target.value)}
           />
           <Button
-            className="flex items-center justify-center bg-indigo-600"
+            className="flex items-center justify-center bg-indigo-600 hover:bg-indigo-700"
             label="Register"
             size="large"
             type="submit"

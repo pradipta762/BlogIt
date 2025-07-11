@@ -35,12 +35,4 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :description, :user_id, :organization_id, category_ids: [])
     end
-
-    def current_user
-      default_user
-    end
-
-    def current_organization
-      default_organization
-    end
 end

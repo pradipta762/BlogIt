@@ -15,7 +15,6 @@ const Signup = ({ history }) => {
   const [organizationId, setOrganizationId] = useState(null);
 
   const { data: organizations } = useFetchOrganizations();
-  Logger.info(organizations);
 
   const { mutate: signup, isLoading: signupPageLoading } = useSignup({
     onSuccess: () => history.push(routes.root),
