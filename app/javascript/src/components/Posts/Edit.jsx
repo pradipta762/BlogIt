@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 
+import { MenuHorizontal } from "@bigbinary/neeto-icons";
+import { Button, Dropdown } from "@bigbinary/neetoui";
+import postsApi from "apis/posts";
 import { Container, PageHeader } from "components/commons";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useUpdatePost, useShowPost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
+import ActionDropdownMenu from "./ActionDropdownMenu";
+import { POST_STATUS } from "./constants";
 import Form from "./Form";
 import { makeCategoryOptions } from "./utils";
 
@@ -15,6 +20,7 @@ const EditPost = ({ history }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [status, setStatus] = useState(POST_STATUS.PUBLISHED);
 
   const { slug } = useParams();
 
@@ -62,10 +68,35 @@ const EditPost = ({ history }) => {
     });
   };
 
+  const destroyPost = async () => {
+    try {
+      await postsApi.destroy(slug);
+      history.push(routes.dashboard);
+    } catch (error) {
+      Logger.error(error);
+    }
+  };
+
+  const handleCancel = () => {
+    history.push(routes.dashboard);
+  };
+
   return (
     <Container className="w-full">
       <div className="flex flex-col gap-y-8">
-        <PageHeader title="Edit blog post" />
+        <PageHeader style="h1" title="Edit blog post">
+          <div className="flex items-center space-x-4">
+            <Button label="Cancel" style="secondary" onClick={handleCancel} />
+            <ActionDropdownMenu {...{ status, setStatus, handleSubmit }} />
+            <Dropdown buttonStyle="text" icon={MenuHorizontal}>
+              <Dropdown.Menu>
+                <Dropdown.MenuItem.Button style="danger" onClick={destroyPost}>
+                  Delete
+                </Dropdown.MenuItem.Button>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+        </PageHeader>
         <Form
           {...{
             categoryOptions,
@@ -78,7 +109,6 @@ const EditPost = ({ history }) => {
             handleCategoryChange,
           }}
           isLoading={isPostDetailsLoading || isPostUpdating}
-          label="Update"
         />
       </div>
     </Container>

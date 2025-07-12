@@ -57,7 +57,7 @@ const Dashboard = () => {
         <div className="flex w-full items-center justify-between">
           <PageHeader style="h1" title="Blog posts">
             <Button
-              className="bg-indigo-600 hover:bg-indigo-800"
+              className="bg-indigo-700 hover:bg-indigo-800"
               label="Add a new post"
               to={routes.posts.create}
             />

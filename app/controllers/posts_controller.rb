@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   DEFAULT_PAGE_SIZE = 4
   DEFAULT_PAGE_NUMBER = 1
 
-  before_action :load_post!, only: %i[show update]
+  before_action :load_post!, only: %i[show update destroy]
 
   def index
     @posts = Post.includes(:user, :categories, :organization)
@@ -30,6 +30,11 @@ class PostsController < ApplicationController
   def update
     @post.update!(post_params)
     render_notice(t("successfully_updated", entity: "Post"))
+  end
+
+  def destroy
+    @post.destroy!
+    render_notice(t("successfully_deleted", entity: "Post"))
   end
 
   private

@@ -5,7 +5,7 @@ import { ActionDropdown } from "@bigbinary/neetoui";
 
 import { POST_STATUS } from "./constants";
 
-const ActionDropdownMenu = ({ status, setStatus, handleStatusChanged }) => {
+const ActionDropdownMenu = ({ status, setStatus, handleSubmit }) => {
   const isPostPublished = status === POST_STATUS.PUBLISHED;
 
   const buttonLabel = isPostPublished ? "Publish" : "Show as draft";
@@ -14,17 +14,25 @@ const ActionDropdownMenu = ({ status, setStatus, handleStatusChanged }) => {
     <ActionDropdown
       buttonStyle="primary"
       label={buttonLabel}
-      onClick={handleStatusChanged}
+      buttonProps={{
+        className: "bg-indigo-700",
+      }}
+      dropdownProps={{
+        buttonProps: {
+          className: "bg-indigo-700",
+        },
+      }}
+      onClick={handleSubmit}
     >
       <ActionDropdown.Menu>
         <ActionDropdown.MenuItem.Button
-          prefix={isPostPublished ?? <Check />}
+          prefix={isPostPublished ?? <Check size={20} />}
           onClick={() => setStatus("published")}
         >
           Publish
         </ActionDropdown.MenuItem.Button>
         <ActionDropdown.MenuItem.Button
-          prefix={!isPostPublished ?? <Check />}
+          prefix={!isPostPublished ?? <Check size={20} />}
           onClick={() => setStatus("draft")}
         >
           Save as draft
