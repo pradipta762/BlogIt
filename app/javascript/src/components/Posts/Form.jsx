@@ -12,20 +12,23 @@ const Form = ({
   categoryOptions,
   title,
   setTitle,
-  setSelectedCategories,
   selectedCategories,
   description,
   setDescription,
   isLoading,
   handleSubmit,
   label,
+  handleCategoryChange,
 }) => {
   const history = useHistory();
   const handleCancel = () => {
     history.push(routes.dashboard);
   };
 
-  const defaultCategoryOptions = makeCategoryOptions(selectedCategories);
+  const defaultCategoryOptions =
+    selectedCategories?.length > 0
+      ? makeCategoryOptions(selectedCategories)
+      : undefined;
 
   return (
     <form
@@ -52,14 +55,7 @@ const Form = ({
           options={categoryOptions}
           placeholder="Search category"
           value={defaultCategoryOptions}
-          onChange={selectedOptions =>
-            setSelectedCategories(
-              selectedOptions.map(option => ({
-                id: option.value,
-                name: option.label,
-              }))
-            )
-          }
+          onChange={selectedOptions => handleCategoryChange(selectedOptions)}
         />
         <Textarea
           required

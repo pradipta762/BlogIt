@@ -2,7 +2,7 @@ import React from "react";
 
 import { Edit } from "@bigbinary/neeto-icons";
 import { Avatar, Button, Typography } from "@bigbinary/neetoui";
-import { Container, PageLoader } from "components/commons";
+import { Container, PageLoader, PageHeader } from "components/commons";
 import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
 import {
@@ -14,7 +14,6 @@ import List from "./Categories/List";
 import { formatDate } from "./utils";
 
 import routes from "../../routes";
-import { PageHeader } from "../commons";
 
 const ShowPost = () => {
   const { slug } = useParams();
@@ -22,7 +21,7 @@ const ShowPost = () => {
 
   const { data: post, isLoading, error } = useShowPost(slug);
   const userName = post?.user?.name;
-  const createdAt = formatDate(post?.created_at);
+  const updatedAt = formatDate(post?.updated_at);
 
   if (error) {
     Logger.error(error);
@@ -58,7 +57,7 @@ const ShowPost = () => {
               <div>
                 <Typography className="font-semibold">{userName}</Typography>
                 <Typography className="text-sm text-gray-400">
-                  {createdAt}
+                  {updatedAt}
                 </Typography>
               </div>
             </div>

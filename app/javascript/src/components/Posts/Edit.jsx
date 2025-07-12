@@ -33,6 +33,14 @@ const EditPost = ({ history }) => {
 
   const categoryOptions = makeCategoryOptions(categories);
 
+  const handleCategoryChange = selectedOptions =>
+    setSelectedCategories(
+      selectedOptions.map(option => ({
+        id: option.value,
+        name: option.label,
+      }))
+    );
+
   useEffect(() => {
     if (post) {
       setTitle(post.title);
@@ -49,7 +57,7 @@ const EditPost = ({ history }) => {
       payload: {
         title,
         description,
-        category_ids: selectedCategories.map(cat => cat.id),
+        category_ids: selectedCategories.map(category => category.id),
       },
     });
   };
@@ -65,9 +73,9 @@ const EditPost = ({ history }) => {
             setTitle,
             description,
             setDescription,
-            setSelectedCategories,
             selectedCategories,
             handleSubmit,
+            handleCategoryChange,
           }}
           isLoading={isPostDetailsLoading || isPostUpdating}
           label="Update"

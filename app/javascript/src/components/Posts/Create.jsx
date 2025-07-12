@@ -15,29 +15,34 @@ const CreatePost = ({ history }) => {
   const [description, setDescription] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const { mutate: createPost, isLoading } = useCreatePost();
+  const { mutate: createPost, isLoading } = useCreatePost({
+    onSuccess: () => {
+      history.replace(routes.dashboard);
+    },
+    onError: error => {
+      Logger.error(error);
+    },
+  });
   const { data: categories } = useFetchCategories();
 
   const categoryOptions = makeCategoryOptions(categories);
 
+  const handleCategoryChange = selectedOptions => {
+    const categories = selectedOptions.map(option => ({
+      id: option.value,
+      name: option.label,
+    }));
+    setSelectedCategories(categories);
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
 
-    createPost(
-      {
-        title,
-        description,
-        category_ids: selectedCategories,
-      },
-      {
-        onSuccess: () => {
-          history.push(routes.dashboard);
-        },
-        onError: error => {
-          Logger.error(error);
-        },
-      }
-    );
+    createPost({
+      title,
+      description,
+      category_ids: selectedCategories.map(cat => cat.id),
+    });
   };
 
   return (
@@ -51,9 +56,9 @@ const CreatePost = ({ history }) => {
             setTitle,
             description,
             setDescription,
-            setSelectedCategories,
             isLoading,
             handleSubmit,
+            handleCategoryChange,
           }}
           label="Submit"
         />
