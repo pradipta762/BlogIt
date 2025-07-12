@@ -4,6 +4,7 @@ import { Button, Input, Select, Textarea } from "@bigbinary/neetoui";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import { MAX_DESCRIPTION_LENGTH, MAX_TITLE_LENGTH } from "./constants";
+import { makeCategoryOptions } from "./utils";
 
 import routes from "../../routes";
 
@@ -12,15 +13,19 @@ const Form = ({
   title,
   setTitle,
   setSelectedCategories,
+  selectedCategories,
   description,
   setDescription,
-  loading,
+  isLoading,
   handleSubmit,
+  label,
 }) => {
   const history = useHistory();
   const handleCancel = () => {
     history.push(routes.dashboard);
   };
+
+  const defaultCategoryOptions = makeCategoryOptions(selectedCategories);
 
   return (
     <form
@@ -46,8 +51,14 @@ const Form = ({
           label="Category"
           options={categoryOptions}
           placeholder="Search category"
+          value={defaultCategoryOptions}
           onChange={selectedOptions =>
-            setSelectedCategories(selectedOptions.map(option => option.value))
+            setSelectedCategories(
+              selectedOptions.map(option => ({
+                id: option.value,
+                name: option.label,
+              }))
+            )
           }
         />
         <Textarea
@@ -67,8 +78,8 @@ const Form = ({
         <Button label="Cancel" style="secondary" onClick={handleCancel} />
         <Button
           className="bg-indigo-700 hover:bg-indigo-800"
-          label="Submit"
-          loading={loading}
+          label={label}
+          loading={isLoading}
           type="submit"
         />
       </div>

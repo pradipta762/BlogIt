@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   DEFAULT_PAGE_SIZE = 4
   DEFAULT_PAGE_NUMBER = 1
 
-  before_action :load_post!, only: %i[show]
+  before_action :load_post!, only: %i[show update]
 
   def index
     @posts = Post.includes(:user, :categories, :organization)
@@ -20,11 +20,16 @@ class PostsController < ApplicationController
     post.user = current_user
     post.organization = current_organization
     post.save!
-    render_notice(t("successfully_created", entity: "Task"))
+    render_notice(t("successfully_created", entity: "Post"))
   end
 
   def show
     render :show
+  end
+
+  def update
+    @post.update!(post_params)
+    render_notice(t("successfully_updated", entity: "Post"))
   end
 
   private

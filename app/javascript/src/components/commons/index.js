@@ -1,7 +1,7 @@
 import Container from "./Container";
+import PageHeader from "./PageHeader";
 import PageLoader from "./PageLoader";
-import PageTitle from "./PageTitle";
 import PrivateRoute from "./PrivateRoute";
 import Toastr from "./Toastr";
 
-export { Container, PageTitle, Toastr, PageLoader, PrivateRoute };
+export { Container, PageHeader, Toastr, PageLoader, PrivateRoute };

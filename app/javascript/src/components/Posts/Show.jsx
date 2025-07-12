@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Avatar, Typography } from "@bigbinary/neetoui";
+import { Edit } from "@bigbinary/neeto-icons";
+import { Avatar, Button, Typography } from "@bigbinary/neetoui";
 import { Container, PageLoader } from "components/commons";
 import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
@@ -13,6 +14,7 @@ import List from "./Categories/List";
 import { formatDate } from "./utils";
 
 import routes from "../../routes";
+import { PageHeader } from "../commons";
 
 const ShowPost = () => {
   const { slug } = useParams();
@@ -35,11 +37,17 @@ const ShowPost = () => {
     <Container>
       <div className="flex flex-col gap-y-8 p-6">
         <div className="mt-8 flex w-full items-start justify-between gap-x-6">
-          <div className="flex flex-col gap-y-3">
+          <div className="flex w-full flex-col gap-y-3">
             <List categories={post?.categories} />
-            <Typography className="text-4xl font-semibold" style="h2">
-              {post?.title}
-            </Typography>
+            <PageHeader style="h2" title={post?.title}>
+              <Button
+                icon={Edit}
+                size="large"
+                style="text"
+                to={`/posts/${slug}/edit`}
+                tooltipProps={{ content: "Edit Task" }}
+              />
+            </PageHeader>
             <div className="flex items-center gap-4">
               <Avatar
                 size="large"
