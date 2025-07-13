@@ -6,8 +6,8 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import List from "../Categories/List";
 import { formatDate } from "../utils";
 
-const Card = ({ title, user, categories, created_at, slug }) => {
-  const formattedDate = formatDate(created_at);
+const Card = ({ title, user, categories, updated_at, slug }) => {
+  const formattedDate = formatDate(updated_at);
 
   return (
     <div className="w-full border-b border-gray-200 py-3">

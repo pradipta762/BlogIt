@@ -1,7 +1,8 @@
 import React from "react";
 
-import { Avatar, Typography } from "@bigbinary/neetoui";
-import { Container, PageLoader } from "components/commons";
+import { Edit } from "@bigbinary/neeto-icons";
+import { Avatar, Button, Tag, Typography } from "@bigbinary/neetoui";
+import { Container, PageLoader, PageHeader } from "components/commons";
 import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
 import {
@@ -10,6 +11,7 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 
 import List from "./Categories/List";
+import { POST_STATUS } from "./constants";
 import { formatDate } from "./utils";
 
 import routes from "../../routes";
@@ -20,7 +22,10 @@ const ShowPost = () => {
 
   const { data: post, isLoading, error } = useShowPost(slug);
   const userName = post?.user?.name;
-  const createdAt = formatDate(post?.created_at);
+  const updatedAt = formatDate(post?.updated_at);
+
+  const isDraftPost = post?.status === POST_STATUS.DRAFT;
+  Logger.info(isDraftPost);
 
   if (error) {
     Logger.error(error);
@@ -35,11 +40,25 @@ const ShowPost = () => {
     <Container>
       <div className="flex flex-col gap-y-8 p-6">
         <div className="mt-8 flex w-full items-start justify-between gap-x-6">
-          <div className="flex flex-col gap-y-3">
+          <div className="flex w-full flex-col gap-y-3">
             <List categories={post?.categories} />
-            <Typography className="text-4xl font-semibold" style="h2">
-              {post?.title}
-            </Typography>
+            <PageHeader
+              style="h2"
+              title={
+                <div className="flex items-center gap-4">
+                  <span>{post?.title}</span>
+                  {isDraftPost && <Tag label="Draft" style="danger" />}
+                </div>
+              }
+            >
+              <Button
+                icon={Edit}
+                size="large"
+                style="text"
+                to={`/posts/${slug}/edit`}
+                tooltipProps={{ content: "Edit Task" }}
+              />
+            </PageHeader>
             <div className="flex items-center gap-4">
               <Avatar
                 size="large"
@@ -50,7 +69,7 @@ const ShowPost = () => {
               <div>
                 <Typography className="font-semibold">{userName}</Typography>
                 <Typography className="text-sm text-gray-400">
-                  {createdAt}
+                  {updatedAt}
                 </Typography>
               </div>
             </div>

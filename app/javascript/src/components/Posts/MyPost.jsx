@@ -1,44 +1,60 @@
 import React from "react";
 
 import { Button, Pagination, Typography } from "@bigbinary/neetoui";
-import { useFetchPosts } from "hooks/reactQuery/usePostsApi";
+import postsApi from "apis/posts";
+import { useFetchPosts, useUpdatePost } from "hooks/reactQuery/usePostsApi";
 import useQueryParams from "hooks/useQueryParams";
-import { isEmpty, includes } from "ramda";
+import Logger from "js-logger";
+import { isEmpty } from "ramda";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import useCategoryStore from "stores/useCategoryStore";
 import { buildUrl } from "utils/url";
 
-import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from "./constants";
+import PostTable from "./Table";
 
 import routes from "../../routes";
 import { Container, PageLoader, PageHeader } from "../commons";
-import Lists from "../Posts/Lists";
+import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from "../Dashboard/constants";
 
-const Dashboard = () => {
+const MyPost = () => {
   const history = useHistory();
 
   const { page } = useQueryParams();
 
   const currentPage = Number(page) || DEFAULT_PAGE_NUMBER;
 
-  const { data, isLoading } = useFetchPosts(currentPage);
+  const { data, isLoading } = useFetchPosts(currentPage, { my_posts: true });
 
   const posts = data?.posts || [];
   const meta = data?.meta || {};
 
-  const { selectedCategory } = useCategoryStore();
-
-  const selectedCategoryIds = selectedCategory.map(c => c.id);
-
-  const filteredPosts = isEmpty(selectedCategory)
-    ? posts
-    : posts.filter(({ categories }) =>
-        categories.some(category => includes(category.id, selectedCategoryIds))
-      );
+  const { mutate: updatePost } = useUpdatePost({
+    onSuccess: () => {},
+    onError: error => {
+      Logger.error(error);
+    },
+  });
 
   const handlePageNavigation = newPage => {
     if (newPage === 1) history.replace(routes.dashboard);
     history.replace(buildUrl(routes.dashboard, { page: newPage }));
+  };
+
+  const deletePost = async slug => {
+    try {
+      await postsApi.destroy(slug);
+      history.push(routes.dashboard);
+    } catch (error) {
+      Logger.error(error);
+    }
+  };
+
+  const updatePostStatus = (slug, status) => {
+    updatePost({
+      slug,
+      payload: {
+        status,
+      },
+    });
   };
 
   if (isEmpty(posts)) {
@@ -60,19 +76,14 @@ const Dashboard = () => {
   return (
     <Container className="flex min-h-screen w-full flex-col justify-between space-y-4">
       <div className="flex w-full flex-col space-y-4">
-        <div className="flex w-full items-center justify-between">
-          <PageHeader style="h1" title="Blog posts">
-            <Button
-              className="bg-indigo-700 hover:bg-indigo-800"
-              label="Add a new post"
-              to={routes.posts.create}
-            />
-          </PageHeader>
+        <div className="flex w-full flex-col justify-between gap-2">
+          <PageHeader style="h1" title="My blog posts" />
+          <Typography>{meta.total_count} articles</Typography>
         </div>
         {isLoading ? (
           <PageLoader />
         ) : (
-          <Lists {...{ filteredPosts }} className="w-full flex-1" />
+          <PostTable {...{ posts, deletePost, updatePostStatus }} />
         )}
       </div>
       {meta.total_pages > 1 && (
@@ -89,4 +100,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default MyPost;

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.posts @posts do |post|
-  json.extract! post, :id, :title, :description, :created_at, :updated_at, :slug
+  json.extract! post, :id, :title, :description, :created_at, :updated_at, :slug, :status
 
   json.user do
     json.extract! post.user, :id, :name, :email
@@ -17,4 +17,3 @@ json.meta do
   json.current_page @posts.current_page
   json.total_pages @posts.total_pages
 end
-

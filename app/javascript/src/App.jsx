@@ -10,8 +10,7 @@ import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { ToastContainer } from "react-toastify";
 import { getFromLocalStorage } from "utils/storage";
 
-import CreatePost from "./components/Posts/Create";
-import ShowPost from "./components/Posts/Show";
+import { CreatePost, EditPost, MyPost, ShowPost } from "./components/Posts";
 import routes from "./routes";
 
 const App = () => {
@@ -26,6 +25,8 @@ const App = () => {
         <Switch>
           <Route exact component={CreatePost} path={routes.posts.create} />
           <Route exact component={ShowPost} path={routes.posts.show} />
+          <Route exact component={EditPost} path={routes.posts.edit} />
+          <Route exact component={MyPost} path={routes.posts.myPost} />
           <Route exact component={Dashboard} path={routes.dashboard} />
           <Route exact component={Signup} path={routes.auth.signup} />
           <Route exact component={Login} path={routes.auth.login} />

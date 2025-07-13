@@ -1,30 +1,28 @@
 import React from "react";
 
-import { Button, Input, Select, Textarea } from "@bigbinary/neetoui";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Input, Select, Textarea } from "@bigbinary/neetoui";
 
 import { MAX_DESCRIPTION_LENGTH, MAX_TITLE_LENGTH } from "./constants";
-
-import routes from "../../routes";
+import { makeCategoryOptions } from "./utils";
 
 const Form = ({
   categoryOptions,
   title,
   setTitle,
-  setSelectedCategories,
   description,
   setDescription,
-  loading,
+  selectedCategories,
   handleSubmit,
+  handleCategoryChange,
 }) => {
-  const history = useHistory();
-  const handleCancel = () => {
-    history.push(routes.dashboard);
-  };
+  const defaultCategoryOptions =
+    selectedCategories?.length > 0
+      ? makeCategoryOptions(selectedCategories)
+      : undefined;
 
   return (
     <form
-      className="flex min-h-[600px] w-full flex-col justify-between rounded-xl border px-10 py-8 shadow-sm"
+      className="flex w-full flex-col justify-between rounded-xl border px-10 py-8 shadow-sm"
       onSubmit={handleSubmit}
     >
       <div className="space-y-3">
@@ -46,9 +44,8 @@ const Form = ({
           label="Category"
           options={categoryOptions}
           placeholder="Search category"
-          onChange={selectedOptions =>
-            setSelectedCategories(selectedOptions.map(option => option.value))
-          }
+          value={defaultCategoryOptions}
+          onChange={selectedOptions => handleCategoryChange(selectedOptions)}
         />
         <Textarea
           required
@@ -61,15 +58,6 @@ const Form = ({
           onChange={({ target: { value } }) =>
             setDescription(value.slice(0, MAX_DESCRIPTION_LENGTH))
           }
-        />
-      </div>
-      <div className="mt-6 flex justify-end space-x-3">
-        <Button label="Cancel" style="secondary" onClick={handleCancel} />
-        <Button
-          className="bg-indigo-700 hover:bg-indigo-800"
-          label="Submit"
-          loading={loading}
-          type="submit"
         />
       </div>
     </form>

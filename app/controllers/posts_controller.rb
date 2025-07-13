@@ -4,14 +4,24 @@ class PostsController < ApplicationController
   DEFAULT_PAGE_SIZE = 4
   DEFAULT_PAGE_NUMBER = 1
 
-  before_action :load_post!, only: %i[show]
+  before_action :load_post!, only: %i[show update destroy]
 
   def index
-    @posts = Post.includes(:user, :categories, :organization)
-      .where(organization_id: current_organization.id)
-      .order(created_at: :desc)
-      .page(params[:page]&.to_i || DEFAULT_PAGE_NUMBER)
-      .per(DEFAULT_PAGE_SIZE)
+    @posts = if params[:my_posts].to_s == "true"
+      current_user.posts
+        .includes(:user, :categories, :organization)
+        .where(organization_id: current_organization.id)
+        .order(updated_at: :desc)
+        .page(params[:page]&.to_i || DEFAULT_PAGE_NUMBER)
+        .per(DEFAULT_PAGE_SIZE)
+    else
+      Post.published
+        .includes(:user, :categories, :organization)
+        .where(organization_id: current_organization.id)
+        .order(created_at: :desc)
+        .page(params[:page]&.to_i || DEFAULT_PAGE_NUMBER)
+        .per(DEFAULT_PAGE_SIZE)
+    end
     render :index
   end
 
@@ -20,11 +30,21 @@ class PostsController < ApplicationController
     post.user = current_user
     post.organization = current_organization
     post.save!
-    render_notice(t("successfully_created", entity: "Task"))
+    render_notice(t("successfully_created", entity: "Post"))
   end
 
   def show
     render :show
+  end
+
+  def update
+    @post.update!(post_params)
+    render_notice(t("successfully_updated", entity: "Post"))
+  end
+
+  def destroy
+    @post.destroy!
+    render_notice(t("successfully_deleted", entity: "Post"))
   end
 
   private
@@ -34,6 +54,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :description, :user_id, :organization_id, category_ids: [])
+      params.require(:post).permit(:title, :description, :user_id, :organization_id, :status, category_ids: [])
     end
 end
