@@ -46,6 +46,7 @@ const CreatePost = ({ history }) => {
       title,
       description,
       category_ids: selectedCategories.map(cat => cat.id),
+      status,
     });
   };
 

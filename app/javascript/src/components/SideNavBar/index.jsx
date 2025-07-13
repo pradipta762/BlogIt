@@ -5,6 +5,7 @@ import {
   Edit,
   NeetoChangelog,
   ListDetails,
+  Folder,
 } from "@bigbinary/neeto-icons";
 import { Button } from "@bigbinary/neetoui";
 import authApi from "apis/auth";
@@ -53,6 +54,7 @@ const Sidebar = () => {
             />
             <Item icon={NeetoChangelog} path={routes.root} />
             <Item icon={Edit} path={routes.posts.create} />
+            <Item icon={Folder} path={routes.posts.myPost} />
             <Button
               icon={ListDetails}
               size="large"

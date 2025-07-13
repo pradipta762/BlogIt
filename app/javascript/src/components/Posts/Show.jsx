@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Edit } from "@bigbinary/neeto-icons";
-import { Avatar, Button, Typography } from "@bigbinary/neetoui";
+import { Avatar, Button, Tag, Typography } from "@bigbinary/neetoui";
 import { Container, PageLoader, PageHeader } from "components/commons";
 import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
@@ -11,6 +11,7 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 
 import List from "./Categories/List";
+import { POST_STATUS } from "./constants";
 import { formatDate } from "./utils";
 
 import routes from "../../routes";
@@ -22,6 +23,9 @@ const ShowPost = () => {
   const { data: post, isLoading, error } = useShowPost(slug);
   const userName = post?.user?.name;
   const updatedAt = formatDate(post?.updated_at);
+
+  const isDraftPost = post?.status === POST_STATUS.DRAFT;
+  Logger.info(isDraftPost);
 
   if (error) {
     Logger.error(error);
@@ -38,7 +42,15 @@ const ShowPost = () => {
         <div className="mt-8 flex w-full items-start justify-between gap-x-6">
           <div className="flex w-full flex-col gap-y-3">
             <List categories={post?.categories} />
-            <PageHeader style="h2" title={post?.title}>
+            <PageHeader
+              style="h2"
+              title={
+                <div className="flex items-center gap-4">
+                  <span>{post?.title}</span>
+                  {isDraftPost && <Tag label="Draft" style="danger" />}
+                </div>
+              }
+            >
               <Button
                 icon={Edit}
                 size="large"

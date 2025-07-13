@@ -3,11 +3,11 @@ import { QUERY_KEYS } from "constants/query";
 import postsApi from "apis/posts";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-export const useFetchPosts = page =>
+export const useFetchPosts = (page, params = {}) =>
   useQuery({
-    queryKey: [QUERY_KEYS.POST, page],
+    queryKey: [QUERY_KEYS.POST, page, params],
     queryFn: async () => {
-      const { data } = await postsApi.fetch({ page });
+      const { data } = await postsApi.fetch({ page, ...params });
 
       return data;
     },

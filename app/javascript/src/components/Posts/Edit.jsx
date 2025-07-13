@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { MenuHorizontal } from "@bigbinary/neeto-icons";
+import { ExternalLink, MenuHorizontal } from "@bigbinary/neeto-icons";
 import { Button, Dropdown } from "@bigbinary/neetoui";
 import postsApi from "apis/posts";
 import { Container, PageHeader } from "components/commons";
@@ -64,6 +64,7 @@ const EditPost = ({ history }) => {
         title,
         description,
         category_ids: selectedCategories.map(category => category.id),
+        status,
       },
     });
   };
@@ -86,6 +87,11 @@ const EditPost = ({ history }) => {
       <div className="flex flex-col gap-y-8">
         <PageHeader style="h1" title="Edit blog post">
           <div className="flex items-center space-x-4">
+            <Button
+              icon={ExternalLink}
+              style="text"
+              to={`/posts/${slug}/show`}
+            />
             <Button label="Cancel" style="secondary" onClick={handleCancel} />
             <ActionDropdownMenu {...{ status, setStatus, handleSubmit }} />
             <Dropdown buttonStyle="text" icon={MenuHorizontal}>
