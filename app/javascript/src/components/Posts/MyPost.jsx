@@ -1,17 +1,17 @@
 import React from "react";
 
-import { Button, Pagination, Typography } from "@bigbinary/neetoui";
 import postsApi from "apis/posts";
 import { useFetchPosts, useUpdatePost } from "hooks/reactQuery/usePostsApi";
 import useQueryParams from "hooks/useQueryParams";
 import Logger from "js-logger";
+import { Button, Pagination, Typography } from "neetoui";
 import { isEmpty } from "ramda";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import routes from "routes";
 import { buildUrl } from "utils/url";
 
 import PostTable from "./Table";
 
-import routes from "../../routes";
 import { Container, PageLoader, PageHeader } from "../commons";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from "../Dashboard/constants";
 

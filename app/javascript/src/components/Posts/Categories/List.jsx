@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Tag } from "@bigbinary/neetoui";
+import { Tag } from "neetoui";
 import { isEmpty } from "ramda";
 
 const List = ({ categories }) => {

@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 
-import { Button } from "@bigbinary/neetoui";
 import { Container, PageHeader } from "components/commons";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useCreatePost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
+import { Button } from "neetoui";
+import routes from "routes";
 
 import ActionDropdownMenu from "./ActionDropdownMenu";
 import { POST_STATUS } from "./constants";
 import Form from "./Form";
 import { makeCategoryOptions } from "./utils";
-
-import routes from "../../routes";
 
 const CreatePost = ({ history }) => {
   const [title, setTitle] = useState("");

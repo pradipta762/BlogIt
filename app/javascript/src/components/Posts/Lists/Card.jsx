@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Typography } from "@bigbinary/neetoui";
+import { Typography } from "neetoui";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import List from "../Categories/List";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Input, Select, Textarea } from "@bigbinary/neetoui";
+import { Input, Select, Textarea } from "neetoui";
 
 import { MAX_DESCRIPTION_LENGTH, MAX_TITLE_LENGTH } from "./constants";
 import { makeCategoryOptions } from "./utils";

@@ -1,20 +1,19 @@
 import React from "react";
 
-import { Edit } from "@bigbinary/neeto-icons";
-import { Avatar, Button, Tag, Typography } from "@bigbinary/neetoui";
 import { Container, PageLoader, PageHeader } from "components/commons";
 import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
+import { Edit } from "neetoicons";
+import { Avatar, Button, Tag, Typography } from "neetoui";
 import {
   useHistory,
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
+import routes from "routes";
 
 import List from "./Categories/List";
 import { POST_STATUS } from "./constants";
 import { formatDate } from "./utils";
-
-import routes from "../../routes";
 
 const ShowPost = () => {
   const { slug } = useParams();

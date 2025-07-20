@@ -1,17 +1,17 @@
 import React from "react";
 
-import { Button, Pagination, Typography } from "@bigbinary/neetoui";
+import { Container, PageLoader, PageHeader } from "components/commons";
 import { useFetchPosts } from "hooks/reactQuery/usePostsApi";
 import useQueryParams from "hooks/useQueryParams";
+import { Button, Pagination, Typography } from "neetoui";
 import { isEmpty, includes } from "ramda";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import routes from "routes";
 import useCategoryStore from "stores/useCategoryStore";
 import { buildUrl } from "utils/url";
 
 import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from "./constants";
 
-import routes from "../../routes";
-import { Container, PageLoader, PageHeader } from "../commons";
 import Lists from "../Posts/Lists";
 
 const Dashboard = () => {

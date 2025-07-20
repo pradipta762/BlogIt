@@ -1,10 +1,9 @@
 import React from "react";
 
-import { Button, Input, Typography } from "@bigbinary/neetoui";
 import { PageLoader } from "components/commons";
+import { Button, Input, Typography } from "neetoui";
 import { Link } from "react-router-dom";
-
-import routes from "../../../routes";
+import routes from "routes";
 
 const Login = ({ handleSubmit, setEmail, setPassword, loginPageLoading }) => {
   if (loginPageLoading) return <PageLoader />;

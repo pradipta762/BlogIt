@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Button, Input, Select, Typography } from "@bigbinary/neetoui";
 import { PageLoader } from "components/commons";
 import Logger from "js-logger";
+import { Button, Input, Select, Typography } from "neetoui";
 import { Link } from "react-router-dom";
+import routes from "routes";
 
-import routes from "../../../routes";
 import { makeOrganizationsOptions } from "../utils";
 
 const Signup = ({

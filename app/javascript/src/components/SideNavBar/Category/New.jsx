@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import { Button, Input, Modal, Typography } from "@bigbinary/neetoui";
 import { useCreateCategory } from "hooks/reactQuery/useCategoriesApi";
+import { Button, Input, Modal, Typography } from "neetoui";
 import { useQueryClient } from "react-query";
 
 const New = ({ setIsModalOpen }) => {

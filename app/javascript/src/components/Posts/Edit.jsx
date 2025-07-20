@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 
-import { ExternalLink, MenuHorizontal } from "@bigbinary/neeto-icons";
-import { Button, Dropdown } from "@bigbinary/neetoui";
 import postsApi from "apis/posts";
 import { Container, PageHeader } from "components/commons";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useUpdatePost, useShowPost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
+import { ExternalLink, MenuHorizontal } from "neetoicons";
+import { Button, Dropdown } from "neetoui";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import routes from "routes";
 
 import ActionDropdownMenu from "./ActionDropdownMenu";
 import { POST_STATUS } from "./constants";
 import Form from "./Form";
 import { makeCategoryOptions } from "./utils";
-
-import routes from "../../routes";
 
 const EditPost = ({ history }) => {
   const [title, setTitle] = useState("");

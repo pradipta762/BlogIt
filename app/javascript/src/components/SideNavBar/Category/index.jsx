@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import { Plus, Search } from "@bigbinary/neeto-icons";
-import { Button, Input, Modal, Typography } from "@bigbinary/neetoui";
 import useDebounce from "hooks/useDebounce";
+import { Plus, Search } from "neetoicons";
+import { Button, Input, Modal, Typography } from "neetoui";
 
 import List from "./List";
 import New from "./New";

@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Check } from "@bigbinary/neeto-icons";
-import { ActionDropdown } from "@bigbinary/neetoui";
+import { Check } from "neetoicons";
+import { ActionDropdown } from "neetoui";
 
 import { POST_STATUS } from "./constants";
 
