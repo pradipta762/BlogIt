@@ -3,6 +3,11 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user_using_x_auth_token
 
+  def index
+    users = User.select(:id, :name)
+    render status: :ok, json: { users: }
+  end
+
   def create
     user = User.new(user_params)
     user.save!
