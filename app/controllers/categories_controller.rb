@@ -2,6 +2,7 @@
 
 class CategoriesController < ApplicationController
   before_action :set_category, only: :show
+  skip_before_action :authenticate_user_using_x_auth_token
 
   def index
     categories = Category.all
