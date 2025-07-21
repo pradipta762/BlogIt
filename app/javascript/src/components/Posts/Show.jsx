@@ -24,7 +24,6 @@ const ShowPost = () => {
   const updatedAt = formatDate(post?.updated_at);
 
   const isDraftPost = post?.status === POST_STATUS.DRAFT;
-  Logger.info(isDraftPost);
 
   if (error) {
     Logger.error(error);

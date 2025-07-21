@@ -6,11 +6,6 @@ import { useQuery } from "react-query";
 export const useFetchOrganizations = () =>
   useQuery({
     queryKey: [QUERY_KEYS.ORGANIZATION],
-    queryFn: async () => {
-      const {
-        data: { organizations },
-      } = await organizationsApi.fetch();
-
-      return organizations;
-    },
+    queryFn: () => organizationsApi.fetch(),
+    select: ({ data }) => data.organizations,
   });
