@@ -21,7 +21,8 @@
     "email": "Email",
     "organization": "Organization",
     "password": "Password",
-    "passwordConfirmation": "Password confirmation"
+    "passwordConfirmation": "Password confirmation",
+    "emptyCategory": "No categories present"
   },
   "titles": {
     "blogPost": "Blog posts",
