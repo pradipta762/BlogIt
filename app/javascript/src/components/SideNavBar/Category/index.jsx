@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 import useDebounce from "hooks/useDebounce";
-import { t } from "i18next";
 import { Plus, Search } from "neetoicons";
 import { Button, Input, Modal, Typography } from "neetoui";
+import { useTranslation } from "react-i18next";
 
 import List from "./List";
 import New from "./New";
@@ -13,6 +13,8 @@ const CategoryPane = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showSearchField, setShowSearchField] = useState(false);
   const [selected, setSelected] = useState(null);
+
+  const { t } = useTranslation();
 
   const debouncedSearchTerm = useDebounce(searchTerm);
 

@@ -1,12 +1,14 @@
 import React from "react";
 
 import { PageLoader } from "components/commons";
-import { t } from "i18next";
 import { Button, Input, Typography } from "neetoui";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import routes from "routes";
 
 const Login = ({ handleSubmit, setEmail, setPassword, loginPageLoading }) => {
+  const { t } = useTranslation();
+
   if (loginPageLoading) return <PageLoader />;
 
   return (

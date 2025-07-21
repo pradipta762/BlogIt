@@ -2,10 +2,10 @@ import React from "react";
 
 import { Container, PageLoader, PageHeader } from "components/commons";
 import { useShowPost } from "hooks/reactQuery/usePostsApi";
-import { t } from "i18next";
 import Logger from "js-logger";
 import { Edit } from "neetoicons";
 import { Avatar, Button, Tag, Typography } from "neetoui";
+import { useTranslation } from "react-i18next";
 import {
   useHistory,
   useParams,
@@ -19,6 +19,8 @@ import { formatDate } from "./utils";
 const ShowPost = () => {
   const { slug } = useParams();
   const history = useHistory();
+
+  const { t } = useTranslation();
 
   const { data: post, isLoading, error } = useShowPost(slug);
   const userName = post?.user?.name;

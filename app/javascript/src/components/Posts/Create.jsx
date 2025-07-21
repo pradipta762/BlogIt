@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { Container, PageHeader } from "components/commons";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useCreatePost } from "hooks/reactQuery/usePostsApi";
-import { t } from "i18next";
 import Logger from "js-logger";
 import { Button } from "neetoui";
+import { useTranslation } from "react-i18next";
 import routes from "routes";
 
 import ActionDropdownMenu from "./ActionDropdownMenu";
@@ -18,6 +18,8 @@ const CreatePost = ({ history }) => {
   const [description, setDescription] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [status, setStatus] = useState(POST_STATUS.PUBLISHED);
+
+  const { t } = useTranslation();
 
   const { mutate: createPost } = useCreatePost({
     onSuccess: () => {

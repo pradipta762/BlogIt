@@ -4,10 +4,10 @@ import postsApi from "apis/posts";
 import { Container, PageHeader } from "components/commons";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useUpdatePost, useShowPost } from "hooks/reactQuery/usePostsApi";
-import { t } from "i18next";
 import Logger from "js-logger";
 import { ExternalLink, MenuHorizontal } from "neetoicons";
 import { Button, Dropdown } from "neetoui";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
 
@@ -21,6 +21,8 @@ const EditPost = ({ history }) => {
   const [description, setDescription] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [status, setStatus] = useState(POST_STATUS.PUBLISHED);
+
+  const { t } = useTranslation();
 
   const { slug } = useParams();
 

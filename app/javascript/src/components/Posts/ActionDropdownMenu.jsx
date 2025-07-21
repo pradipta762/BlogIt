@@ -1,12 +1,13 @@
 import React from "react";
 
-import { t } from "i18next";
 import { Check } from "neetoicons";
 import { ActionDropdown } from "neetoui";
+import { useTranslation } from "react-i18next";
 
 import { POST_STATUS } from "./constants";
 
 const ActionDropdownMenu = ({ status, setStatus, handleSubmit }) => {
+  const { t } = useTranslation();
   const isPostPublished = status === POST_STATUS.PUBLISHED;
 
   const buttonLabel = isPostPublished

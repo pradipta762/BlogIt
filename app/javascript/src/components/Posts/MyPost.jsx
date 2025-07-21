@@ -9,11 +9,10 @@ import {
 } from "components/commons";
 import { useFetchPosts, useUpdatePost } from "hooks/reactQuery/usePostsApi";
 import useQueryParams from "hooks/useQueryParams";
-import { t } from "i18next";
 import Logger from "js-logger";
 import { Pagination, Typography } from "neetoui";
 import { isEmpty } from "ramda";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
 import { buildUrl } from "utils/url";
@@ -26,6 +25,8 @@ const MyPost = () => {
   const history = useHistory();
 
   const { page } = useQueryParams();
+
+  const { t } = useTranslation();
 
   const currentPage = Number(page) || DEFAULT_PAGE_NUMBER;
 

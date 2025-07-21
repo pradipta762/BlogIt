@@ -1,7 +1,7 @@
 import React from "react";
 
-import { t } from "i18next";
 import { Input, Select, Textarea } from "neetoui";
+import { useTranslation } from "react-i18next";
 
 import { MAX_DESCRIPTION_LENGTH, MAX_TITLE_LENGTH } from "./constants";
 import { makeCategoryOptions } from "./utils";
@@ -16,6 +16,8 @@ const Form = ({
   handleSubmit,
   handleCategoryChange,
 }) => {
+  const { t } = useTranslation();
+
   const defaultCategoryOptions =
     selectedCategories?.length > 0
       ? makeCategoryOptions(selectedCategories)

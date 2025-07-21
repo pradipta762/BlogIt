@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 
 import { useCreateCategory } from "hooks/reactQuery/useCategoriesApi";
-import { t } from "i18next";
 import { Button, Input, Modal, Typography } from "neetoui";
+import { useTranslation } from "react-i18next";
 import { useQueryClient } from "react-query";
 
 const New = ({ setIsModalOpen }) => {
   const [category, setCategory] = useState("");
   const queryClient = useQueryClient();
+
+  const { t } = useTranslation();
+
   const { mutate: createCategory, isLoading } = useCreateCategory();
 
   const handleAddCategory = () => {

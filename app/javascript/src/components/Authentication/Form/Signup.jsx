@@ -1,9 +1,8 @@
 import React from "react";
 
 import { PageLoader } from "components/commons";
-import { t } from "i18next";
-import Logger from "js-logger";
 import { Button, Input, Select, Typography } from "neetoui";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import routes from "routes";
 
@@ -20,8 +19,7 @@ const Signup = ({
   setOrganizationId,
 }) => {
   const organizationOptions = makeOrganizationsOptions(organizations);
-  Logger.info(organizations);
-  Logger.info(organizationOptions);
+  const { t } = useTranslation();
 
   if (signupPageLoading) return <PageLoader />;
 
