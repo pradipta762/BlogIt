@@ -9,7 +9,7 @@ import {
 import { useFetchPosts } from "hooks/reactQuery/usePostsApi";
 import useQueryParams from "hooks/useQueryParams";
 import { Button, Pagination } from "neetoui";
-import { isEmpty, includes } from "ramda";
+import { isEmpty } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
@@ -29,20 +29,16 @@ const Dashboard = () => {
 
   const currentPage = Number(page) || DEFAULT_PAGE_NUMBER;
 
-  const { data, isLoading } = useFetchPosts(currentPage);
+  const { selectedCategory } = useCategoryStore();
+
+  const selectedCategoryIds = selectedCategory.map(category => category.id);
+
+  const { data, isLoading } = useFetchPosts(currentPage, {
+    category_ids: selectedCategoryIds,
+  });
 
   const posts = data?.posts || [];
   const meta = data?.meta || {};
-
-  const { selectedCategory } = useCategoryStore();
-
-  const selectedCategoryIds = selectedCategory.map(c => c.id);
-
-  const filteredPosts = isEmpty(selectedCategory)
-    ? posts
-    : posts.filter(({ categories }) =>
-        categories.some(category => includes(category.id, selectedCategoryIds))
-      );
 
   const handlePageNavigation = newPage => {
     if (newPage === 1) history.replace(routes.dashboard);
@@ -68,7 +64,7 @@ const Dashboard = () => {
         {isLoading ? (
           <PageLoader />
         ) : (
-          <Lists {...{ filteredPosts }} className="w-full flex-1" />
+          <Lists {...{ posts }} className="w-full flex-1" />
         )}
       </div>
       {meta.total_pages > 1 && (

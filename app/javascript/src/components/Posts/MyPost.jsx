@@ -7,7 +7,7 @@ import {
   PageHeader,
   EmptyBlogs,
 } from "components/commons";
-import { useFetchPosts, useUpdatePost } from "hooks/reactQuery/usePostsApi";
+import { useFetchMyPosts, useUpdatePost } from "hooks/reactQuery/usePostsApi";
 import useQueryParams from "hooks/useQueryParams";
 import Logger from "js-logger";
 import { Pagination, Typography } from "neetoui";
@@ -15,6 +15,7 @@ import { isEmpty } from "ramda";
 import { Trans, useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
+import useCategoryStore from "stores/useCategoryStore";
 import { buildUrl } from "utils/url";
 
 import PostTable from "./Table";
@@ -30,7 +31,11 @@ const MyPost = () => {
 
   const currentPage = Number(page) || DEFAULT_PAGE_NUMBER;
 
-  const { data, isLoading } = useFetchPosts(currentPage, { my_posts: true });
+  const { selectedCategory } = useCategoryStore();
+
+  const { data, isLoading } = useFetchMyPosts(currentPage, {
+    category_ids: selectedCategory.map(category => category.id),
+  });
 
   const posts = data?.posts || [];
   const meta = data?.meta || {};

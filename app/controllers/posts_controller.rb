@@ -4,28 +4,18 @@ class PostsController < ApplicationController
   before_action :load_post!, only: %i[show update destroy]
 
   def index
-    @posts = if params[:my_posts].to_s == "true"
-      current_user.posts
-        .includes(:user, :categories, :organization)
-        .where(organization_id: current_organization.id)
-        .order(updated_at: :desc)
-        .page(params[:page]&.to_i || Constants::DEFAULT_PAGE_NUMBER)
-        .per(Constants::DEFAULT_PAGE_SIZE)
-    else
-      Post.published
+    @posts =
+      current_user.posts.published
         .includes(:user, :categories, :organization)
         .where(organization_id: current_organization.id)
         .order(created_at: :desc)
         .page(params[:page]&.to_i || Constants::DEFAULT_PAGE_NUMBER)
         .per(Constants::DEFAULT_PAGE_SIZE)
-    end
     render :index
   end
 
   def create
-    post = Post.new(post_params)
-    post.user = current_user
-    post.organization = current_organization
+    post = Post.new(post_params.merge(user: current_user, organization: current_organization))
     post.save!
     render_notice(t("successfully_created", entity: "Post"))
   end
@@ -47,7 +37,7 @@ class PostsController < ApplicationController
   private
 
     def load_post!
-      @post = Post.find_by!(slug: params[:slug])
+      @post = current_user.posts.find_by!(slug: params[:slug])
     end
 
     def post_params

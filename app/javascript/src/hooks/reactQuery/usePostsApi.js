@@ -11,6 +11,14 @@ export const useFetchPosts = (page, params = {}) =>
     keepPreviousData: true,
   });
 
+export const useFetchMyPosts = (page, params = {}) =>
+  useQuery({
+    queryKey: [QUERY_KEYS.MYPOSTS, page, params],
+    queryFn: () => postsApi.fetchMyPosts({ page, ...params }),
+    select: ({ data }) => data,
+    keepPreviousData: true,
+  });
+
 export const useShowPost = slug =>
   useQuery({
     queryKey: [QUERY_KEYS.POST, slug],
