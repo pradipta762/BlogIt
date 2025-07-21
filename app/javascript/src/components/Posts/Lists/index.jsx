@@ -2,7 +2,7 @@ import React from "react";
 
 import Card from "./Card";
 
-const Lists = ({ filteredPosts: posts }) => (
+const Lists = ({ posts }) => (
   <div className="flex flex-col space-y-4">
     {posts.map(post => (
       <Card key={post.id} {...post} />

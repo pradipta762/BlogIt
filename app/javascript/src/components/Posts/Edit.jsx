@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from "react";
 
-import { ExternalLink, MenuHorizontal } from "@bigbinary/neeto-icons";
-import { Button, Dropdown } from "@bigbinary/neetoui";
 import postsApi from "apis/posts";
 import { Container, PageHeader } from "components/commons";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useUpdatePost, useShowPost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
+import { ExternalLink, MenuHorizontal } from "neetoicons";
+import { Button, Dropdown } from "neetoui";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import routes from "routes";
 
 import ActionDropdownMenu from "./ActionDropdownMenu";
 import { POST_STATUS } from "./constants";
 import Form from "./Form";
 import { makeCategoryOptions } from "./utils";
 
-import routes from "../../routes";
-
 const EditPost = ({ history }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [status, setStatus] = useState(POST_STATUS.PUBLISHED);
+
+  const { t } = useTranslation();
 
   const { slug } = useParams();
 
@@ -85,7 +87,7 @@ const EditPost = ({ history }) => {
   return (
     <Container className="w-full">
       <div className="flex flex-col gap-y-8">
-        <PageHeader style="h1" title="Edit blog post">
+        <PageHeader style="h1" title={t("titles.editPost")}>
           <div className="flex items-center space-x-4">
             <Button
               icon={ExternalLink}
@@ -97,7 +99,7 @@ const EditPost = ({ history }) => {
             <Dropdown buttonStyle="text" icon={MenuHorizontal}>
               <Dropdown.Menu>
                 <Dropdown.MenuItem.Button style="danger" onClick={destroyPost}>
-                  Delete
+                  {t("labels.delete")}
                 </Dropdown.MenuItem.Button>
               </Dropdown.Menu>
             </Dropdown>

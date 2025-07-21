@@ -4,9 +4,8 @@ import { setAuthHeaders } from "apis/axios";
 import LoginForm from "components/Authentication/Form/Login";
 import { useLogin } from "hooks/reactQuery/useAuthApi";
 import Logger from "js-logger";
+import routes from "routes";
 import { setToLocalStorage } from "utils/storage";
-
-import routes from "../../routes";
 
 const Login = () => {
   const [email, setEmail] = useState("");

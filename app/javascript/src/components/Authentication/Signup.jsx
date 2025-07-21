@@ -4,8 +4,7 @@ import SignupForm from "components/Authentication/Form/Signup";
 import { useSignup } from "hooks/reactQuery/useAuthApi";
 import { useFetchOrganizations } from "hooks/reactQuery/useOrganizationsApi";
 import Logger from "js-logger";
-
-import routes from "../../routes";
+import routes from "routes";
 
 const Signup = ({ history }) => {
   const [name, setName] = useState("");

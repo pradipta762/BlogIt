@@ -1,24 +1,17 @@
 import React, { useState } from "react";
 
-import {
-  Book,
-  Edit,
-  NeetoChangelog,
-  ListDetails,
-  Folder,
-} from "@bigbinary/neeto-icons";
-import { Button } from "@bigbinary/neetoui";
 import authApi from "apis/auth";
 import { resetAuthTokens } from "apis/axios";
 import classNames from "classnames";
 import Logger from "js-logger";
+import { Book, Edit, NeetoChangelog, ListDetails, Folder } from "neetoicons";
+import { Button } from "neetoui";
+import routes from "routes";
 import { getFromLocalStorage, setToLocalStorage } from "utils/storage";
 
 import CategoryPane from "./Category";
 import Item from "./Item";
 import UserProfile from "./UserProfile";
-
-import routes from "../../routes";
 
 const Sidebar = () => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);

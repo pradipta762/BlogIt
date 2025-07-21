@@ -6,24 +6,24 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 export const useFetchPosts = (page, params = {}) =>
   useQuery({
     queryKey: [QUERY_KEYS.POST, page, params],
-    queryFn: async () => {
-      const { data } = await postsApi.fetch({ page, ...params });
+    queryFn: () => postsApi.fetch({ page, ...params }),
+    select: ({ data }) => data,
+    keepPreviousData: true,
+  });
 
-      return data;
-    },
+export const useFetchMyPosts = (page, params = {}) =>
+  useQuery({
+    queryKey: [QUERY_KEYS.MYPOSTS, page, params],
+    queryFn: () => postsApi.fetchMyPosts({ page, ...params }),
+    select: ({ data }) => data,
     keepPreviousData: true,
   });
 
 export const useShowPost = slug =>
   useQuery({
     queryKey: [QUERY_KEYS.POST, slug],
-    queryFn: async () => {
-      const {
-        data: { post },
-      } = await postsApi.show(slug);
-
-      return post;
-    },
+    queryFn: () => postsApi.show(slug),
+    select: ({ data }) => data.post,
   });
 
 export const useCreatePost = ({ onSuccess, onError }) => {

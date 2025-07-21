@@ -2,6 +2,8 @@ import axios from "axios";
 
 const fetch = (params = {}) => axios.get("/posts", { params });
 
+const fetchMyPosts = (params = {}) => axios.get("/my-posts", { params });
+
 const create = payload =>
   axios.post("/posts", {
     post: payload,
@@ -14,6 +16,6 @@ const update = ({ slug, payload }) =>
 
 const destroy = slug => axios.delete(`/posts/${slug}`);
 
-const postsApi = { fetch, create, show, update, destroy };
+const postsApi = { fetch, create, show, update, destroy, fetchMyPosts };
 
 export default postsApi;

@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Input, Select, Textarea } from "@bigbinary/neetoui";
+import { Input, Select, Textarea } from "neetoui";
+import { useTranslation } from "react-i18next";
 
 import { MAX_DESCRIPTION_LENGTH, MAX_TITLE_LENGTH } from "./constants";
 import { makeCategoryOptions } from "./utils";
@@ -15,6 +16,8 @@ const Form = ({
   handleSubmit,
   handleCategoryChange,
 }) => {
+  const { t } = useTranslation();
+
   const defaultCategoryOptions =
     selectedCategories?.length > 0
       ? makeCategoryOptions(selectedCategories)
@@ -28,9 +31,9 @@ const Form = ({
       <div className="space-y-3">
         <Input
           required
-          label="Title"
+          label={t("labels.title")}
           maxLength={MAX_TITLE_LENGTH}
-          placeholder="Blog Title (Max 125 characters allowed)"
+          placeholder={t("placeholders.title")}
           value={title}
           onBlur={({ target: { value } }) => setTitle(value.trim())}
           onChange={({ target: { value } }) =>
@@ -41,17 +44,17 @@ const Form = ({
           isMulti
           isSearchable
           required
-          label="Category"
+          label={t("labels.category")}
           options={categoryOptions}
-          placeholder="Search category"
+          placeholder={t("placeholders.category")}
           value={defaultCategoryOptions}
           onChange={selectedOptions => handleCategoryChange(selectedOptions)}
         />
         <Textarea
           required
-          label="Description"
+          label={t("labels.description")}
           maxLength={MAX_DESCRIPTION_LENGTH}
-          placeholder="Description (Max 10000 characters allowed)"
+          placeholder={t("placeholders.description")}
           rows="10"
           value={description}
           onBlur={({ target: { value } }) => setDescription(value.trim())}

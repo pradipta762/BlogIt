@@ -6,13 +6,8 @@ import { useMutation, useQuery } from "react-query";
 export const useFetchCategories = () =>
   useQuery({
     queryKey: [QUERY_KEYS.CATEGORY],
-    queryFn: async () => {
-      const {
-        data: { categories },
-      } = await categoriesApi.fetch();
-
-      return categories;
-    },
+    queryFn: () => categoriesApi.fetch(),
+    select: ({ data }) => data.categories,
   });
 
 export const useCreateCategory = () =>

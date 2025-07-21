@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Typography } from "@bigbinary/neetoui";
+import { Typography } from "neetoui";
 
 const PageHeader = ({ title, style, children }) => (
   <div className="flex w-full items-center justify-between">

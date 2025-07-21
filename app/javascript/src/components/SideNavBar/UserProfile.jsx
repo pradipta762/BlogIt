@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { LeftArrow } from "@bigbinary/neeto-icons";
-import { Avatar, Typography, Button } from "@bigbinary/neetoui";
+import { LeftArrow } from "neetoicons";
+import { Avatar, Typography, Button } from "neetoui";
 import { getFromLocalStorage } from "utils/storage";
 
 const UserProfile = ({ handleLogout, name, email }) => {

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
-import { Plus, Search } from "@bigbinary/neeto-icons";
-import { Button, Input, Modal, Typography } from "@bigbinary/neetoui";
 import useDebounce from "hooks/useDebounce";
+import { Plus, Search } from "neetoicons";
+import { Button, Input, Modal, Typography } from "neetoui";
+import { useTranslation } from "react-i18next";
 
 import List from "./List";
 import New from "./New";
@@ -13,6 +14,8 @@ const CategoryPane = () => {
   const [showSearchField, setShowSearchField] = useState(false);
   const [selected, setSelected] = useState(null);
 
+  const { t } = useTranslation();
+
   const debouncedSearchTerm = useDebounce(searchTerm);
 
   return (
@@ -21,7 +24,7 @@ const CategoryPane = () => {
         <div className="flex h-full flex-col space-y-5 px-4 pb-8 pt-12">
           <div className="flex items-center justify-between">
             <Typography className="font-semibold uppercase" style="h3">
-              Categories
+              {t("titles.category")}
             </Typography>
             <div className="space-x-2">
               <Button
@@ -39,7 +42,7 @@ const CategoryPane = () => {
           {showSearchField && (
             <Input
               className="flex-grow-0 bg-transparent"
-              placeholder="Search category"
+              placeholder={t("placeholders.category")}
               size="medium"
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}

@@ -8,10 +8,10 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { ToastContainer } from "react-toastify";
+import routes from "routes";
 import { getFromLocalStorage } from "utils/storage";
 
 import { CreatePost, EditPost, MyPost, ShowPost } from "./components/Posts";
-import routes from "./routes";
 
 const App = () => {
   const queryClient = new QueryClient();

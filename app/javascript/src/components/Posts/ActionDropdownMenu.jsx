@@ -1,14 +1,18 @@
 import React from "react";
 
-import { Check } from "@bigbinary/neeto-icons";
-import { ActionDropdown } from "@bigbinary/neetoui";
+import { Check } from "neetoicons";
+import { ActionDropdown } from "neetoui";
+import { useTranslation } from "react-i18next";
 
 import { POST_STATUS } from "./constants";
 
 const ActionDropdownMenu = ({ status, setStatus, handleSubmit }) => {
+  const { t } = useTranslation();
   const isPostPublished = status === POST_STATUS.PUBLISHED;
 
-  const buttonLabel = isPostPublished ? "Publish" : "Show as draft";
+  const buttonLabel = isPostPublished
+    ? t("labels.publish")
+    : t("labels.saveAsDraft");
 
   return (
     <ActionDropdown
@@ -29,13 +33,13 @@ const ActionDropdownMenu = ({ status, setStatus, handleSubmit }) => {
           prefix={isPostPublished ?? <Check size={20} />}
           onClick={() => setStatus("published")}
         >
-          Publish
+          {t("labels.publish")}
         </ActionDropdown.MenuItem.Button>
         <ActionDropdown.MenuItem.Button
           prefix={!isPostPublished ?? <Check size={20} />}
           onClick={() => setStatus("draft")}
         >
-          Save as draft
+          {t("labels.saveAsDraft")}
         </ActionDropdown.MenuItem.Button>
       </ActionDropdown.Menu>
     </ActionDropdown>

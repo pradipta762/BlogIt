@@ -1,23 +1,25 @@
 import React, { useState } from "react";
 
-import { Button } from "@bigbinary/neetoui";
 import { Container, PageHeader } from "components/commons";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useCreatePost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
+import { Button } from "neetoui";
+import { useTranslation } from "react-i18next";
+import routes from "routes";
 
 import ActionDropdownMenu from "./ActionDropdownMenu";
 import { POST_STATUS } from "./constants";
 import Form from "./Form";
 import { makeCategoryOptions } from "./utils";
 
-import routes from "../../routes";
-
 const CreatePost = ({ history }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [status, setStatus] = useState(POST_STATUS.PUBLISHED);
+
+  const { t } = useTranslation();
 
   const { mutate: createPost } = useCreatePost({
     onSuccess: () => {
@@ -57,7 +59,7 @@ const CreatePost = ({ history }) => {
   return (
     <Container className="w-full">
       <div className="flex flex-col gap-y-8">
-        <PageHeader style="h1" title="New blog post">
+        <PageHeader style="h1" title={t("titles.createPost")}>
           <div className="space-x-4">
             <Button label="Cancel" style="secondary" onClick={handleCancel} />
             <ActionDropdownMenu {...{ status, setStatus, handleSubmit }} />
