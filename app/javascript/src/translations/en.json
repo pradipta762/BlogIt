@@ -28,7 +28,8 @@
     "createPost": "New blog post",
     "editPost": "Edit blog post",
     "category": "Categories",
-    "newCategory": "New category"
+    "newCategory": "New category",
+    "myBlogPosts": "My blog posts"
   },
   "errors": {
     "noBlogFound": "You have not posted any blogs. If you want to post one, then click below."

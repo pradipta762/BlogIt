@@ -9,6 +9,7 @@ import {
 } from "components/commons";
 import { useFetchPosts, useUpdatePost } from "hooks/reactQuery/usePostsApi";
 import useQueryParams from "hooks/useQueryParams";
+import { t } from "i18next";
 import Logger from "js-logger";
 import { Pagination, Typography } from "neetoui";
 import { isEmpty } from "ramda";
@@ -73,7 +74,7 @@ const MyPost = () => {
     <Container className="flex min-h-screen w-full flex-col justify-between space-y-4">
       <div className="flex w-full flex-col space-y-4">
         <div className="flex w-full flex-col justify-between gap-2">
-          <PageHeader style="h1" title="My blog posts" />
+          <PageHeader style="h1" title={t("titles.myBlogPosts")} />
           <Typography>
             <Trans i18nKey="totalArticles" values={{ totalPosts }} />
           </Typography>

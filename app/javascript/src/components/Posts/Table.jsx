@@ -1,14 +1,15 @@
 import React from "react";
 
-import { MenuHorizontal } from "@bigbinary/neeto-icons";
-import { Dropdown, Table, Tooltip } from "@bigbinary/neetoui";
 import dayjs from "dayjs";
-import { t } from "i18next";
+import { MenuHorizontal } from "neetoicons";
+import { Dropdown, Table, Tooltip } from "neetoui";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import { POST_STATUS } from "./constants";
 
 const PostTable = ({ posts, deletePost, updatePostStatus }) => {
+  const { t } = useTranslation();
   const columnData = [
     {
       title: "TITLE",

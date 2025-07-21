@@ -2,6 +2,7 @@ import React from "react";
 
 import { Login, Signup } from "components/Authentication";
 import { PrivateRoute } from "components/commons";
+// eslint-disable-next-line no-unused-vars
 import Dashboard from "components/Dashboard";
 import { either, isEmpty, isNil } from "ramda";
 import { QueryClient, QueryClientProvider } from "react-query";
