@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  DEFAULT_PAGE_SIZE = 4
-  DEFAULT_PAGE_NUMBER = 1
-
   before_action :load_post!, only: %i[show update destroy]
 
   def index
@@ -12,15 +9,15 @@ class PostsController < ApplicationController
         .includes(:user, :categories, :organization)
         .where(organization_id: current_organization.id)
         .order(updated_at: :desc)
-        .page(params[:page]&.to_i || DEFAULT_PAGE_NUMBER)
-        .per(DEFAULT_PAGE_SIZE)
+        .page(params[:page]&.to_i || Constants::DEFAULT_PAGE_NUMBER)
+        .per(Constants::DEFAULT_PAGE_SIZE)
     else
       Post.published
         .includes(:user, :categories, :organization)
         .where(organization_id: current_organization.id)
         .order(created_at: :desc)
-        .page(params[:page]&.to_i || DEFAULT_PAGE_NUMBER)
-        .per(DEFAULT_PAGE_SIZE)
+        .page(params[:page]&.to_i || Constants::DEFAULT_PAGE_NUMBER)
+        .per(Constants::DEFAULT_PAGE_SIZE)
     end
     render :index
   end
