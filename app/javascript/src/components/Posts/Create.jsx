@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Container, PageHeader } from "components/commons";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useCreatePost } from "hooks/reactQuery/usePostsApi";
+import { t } from "i18next";
 import Logger from "js-logger";
 import { Button } from "neetoui";
 import routes from "routes";
@@ -56,7 +57,7 @@ const CreatePost = ({ history }) => {
   return (
     <Container className="w-full">
       <div className="flex flex-col gap-y-8">
-        <PageHeader style="h1" title="New blog post">
+        <PageHeader style="h1" title={t("titles.createPost")}>
           <div className="space-x-4">
             <Button label="Cancel" style="secondary" onClick={handleCancel} />
             <ActionDropdownMenu {...{ status, setStatus, handleSubmit }} />

@@ -4,6 +4,7 @@ import postsApi from "apis/posts";
 import { Container, PageHeader } from "components/commons";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useUpdatePost, useShowPost } from "hooks/reactQuery/usePostsApi";
+import { t } from "i18next";
 import Logger from "js-logger";
 import { ExternalLink, MenuHorizontal } from "neetoicons";
 import { Button, Dropdown } from "neetoui";
@@ -84,7 +85,7 @@ const EditPost = ({ history }) => {
   return (
     <Container className="w-full">
       <div className="flex flex-col gap-y-8">
-        <PageHeader style="h1" title="Edit blog post">
+        <PageHeader style="h1" title={t("titles.editPost")}>
           <div className="flex items-center space-x-4">
             <Button
               icon={ExternalLink}
@@ -96,7 +97,7 @@ const EditPost = ({ history }) => {
             <Dropdown buttonStyle="text" icon={MenuHorizontal}>
               <Dropdown.Menu>
                 <Dropdown.MenuItem.Button style="danger" onClick={destroyPost}>
-                  Delete
+                  {t("labels.delete")}
                 </Dropdown.MenuItem.Button>
               </Dropdown.Menu>
             </Dropdown>

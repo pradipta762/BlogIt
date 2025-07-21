@@ -18,6 +18,7 @@ const alias = {
   utils: absolutePath("src/utils"),
   hooks: absolutePath("src/hooks"),
   stores: absolutePath("src/stores"),
+  translations: absolutePath("src/translations"),
   assets: absolutePath("../assets"),
   routes: absolutePath("src/routes"),
   neetoui: "@bigbinary/neetoui",

@@ -1,0 +1,46 @@
+{
+  "labels": {
+    "newPost": "Add a new post",
+    "editPost": "Edit post",
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "saveAsDraft": "Save as draft",
+    "delete": "Delete",
+    "title": "Title",
+    "description": "Description",
+    "category": "Category",
+    "categoryTitle": "Category title",
+    "add": "Add",
+    "cancel": "Cancel",
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "orLogin": "Or Login now",
+    "orRegister": "Or Register now",
+    "register": "Register",
+    "name": "Name",
+    "email": "Email",
+    "organization": "Organization",
+    "password": "Password",
+    "passwordConfirmation": "Password confirmation"
+  },
+  "titles": {
+    "blogPost": "Blog posts",
+    "createPost": "New blog post",
+    "editPost": "Edit blog post",
+    "category": "Categories",
+    "newCategory": "New category"
+  },
+  "errors": {
+    "noBlogFound": "You have not posted any blogs. If you want to post one, then click below."
+  },
+  "placeholders": {
+    "title": "Blog Title (Max 125 characters allowed)",
+    "category": "Search category",
+    "description": "Description (Max 10000 characters allowed)",
+    "name": "Oliver",
+    "email": "oliver@example.com",
+    "organization": "Select your organization",
+    "password": "********"
+  },
+  "totalArticles": "{{totalPosts}} articles"
+}

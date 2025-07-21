@@ -3,6 +3,7 @@ import React from "react";
 import { MenuHorizontal } from "@bigbinary/neeto-icons";
 import { Dropdown, Table, Tooltip } from "@bigbinary/neetoui";
 import dayjs from "dayjs";
+import { t } from "i18next";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import { POST_STATUS } from "./constants";
@@ -63,13 +64,13 @@ const PostTable = ({ posts, deletePost, updatePostStatus }) => {
             <Dropdown.MenuItem.Button
               onClick={() => updatePostStatus(post.slug, POST_STATUS.PUBLISHED)}
             >
-              Publish
+              {t("labels.publish")}
             </Dropdown.MenuItem.Button>
           ) : (
             <Dropdown.MenuItem.Button
               onClick={() => updatePostStatus(post.slug, POST_STATUS.DRAFT)}
             >
-              Unpublish
+              {t("labels.unpublish")}
             </Dropdown.MenuItem.Button>
           )}
           <Dropdown.Divider />
@@ -77,7 +78,7 @@ const PostTable = ({ posts, deletePost, updatePostStatus }) => {
             style="danger"
             onClick={() => deletePost(post.slug)}
           >
-            Delete
+            {t("labels.delete")}
           </Dropdown.MenuItem.Button>
         </Dropdown.Menu>
       </Dropdown>

@@ -1,6 +1,7 @@
 import React from "react";
 
 import { PageLoader } from "components/commons";
+import { t } from "i18next";
 import Logger from "js-logger";
 import { Button, Input, Select, Typography } from "neetoui";
 import { Link } from "react-router-dom";
@@ -35,7 +36,7 @@ const Signup = ({
           className="mt-6 text-center text-3xl font-extrabold
         leading-9 text-gray-800"
         >
-          Sign Up
+          {t("labels.signup")}
         </Typography>
         <div className="text-center">
           <Link
@@ -43,47 +44,47 @@ const Signup = ({
             className="mt-2 text-center text-sm font-medium
             text-indigo-600 "
           >
-            Or Login Now
+            {t("labels.orlogin")}
           </Link>
         </div>
         <form className="mt-8 flex flex-col gap-y-6" onSubmit={handleSubmit}>
           <Input
-            label="Name"
-            placeholder="Oliver"
+            label={t("labels.name")}
+            placeholder={t("placeholders.name")}
             size="large"
             onChange={e => setName(e.target.value)}
           />
           <Input
-            label="Email"
-            placeholder="oliver@example.com"
+            label={t("labels.email")}
+            placeholder={t("placeholders.email")}
             size="large"
             type="email"
             onChange={e => setEmail(e.target.value)}
           />
           <Select
-            label="Organization"
+            label={t("labels.organization")}
             options={organizationOptions}
-            placeholder="Select your organization"
+            placeholder={t("placeholders.organization")}
             size="large"
             onChange={({ value }) => setOrganizationId(value)}
           />
           <Input
-            label="Password"
-            placeholder="********"
+            label={t("labels.password")}
+            placeholder={t("placeholders.password")}
             size="large"
             type="password"
             onChange={e => setPassword(e.target.value)}
           />
           <Input
-            label="Password Confirmation"
-            placeholder="********"
+            label={t("labels.passwordConfirmation")}
+            placeholder={t("placeholders.password")}
             size="large"
             type="password"
             onChange={e => setPasswordConfirmation(e.target.value)}
           />
           <Button
             className="flex items-center justify-center bg-indigo-600 hover:bg-indigo-700"
-            label="Register"
+            label={t("labels.register")}
             size="large"
             type="submit"
           />

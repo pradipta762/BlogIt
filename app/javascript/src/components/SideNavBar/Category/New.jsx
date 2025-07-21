@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { useCreateCategory } from "hooks/reactQuery/useCategoriesApi";
+import { t } from "i18next";
 import { Button, Input, Modal, Typography } from "neetoui";
 import { useQueryClient } from "react-query";
 
@@ -28,25 +29,25 @@ const New = ({ setIsModalOpen }) => {
     <>
       <Modal.Header>
         <Typography className="font-semibold" style="h2">
-          New category
+          {t("titles.newCategory")}
         </Typography>
       </Modal.Header>
       <Modal.Body>
         <Input
-          label="Category title"
+          label={t("labels.categoryTitle")}
           placeholder="Ruby"
           onChange={({ target: { value } }) => setCategory(value)}
         />
         <div className="mt-4 space-x-3">
           <Button
             className="bg-indigo-700"
-            label="Add"
+            label={t("labels.add")}
             loading={isLoading}
             style="primary"
             onClick={handleAddCategory}
           />
           <Button
-            label="Cancel"
+            label={t("labels.cancel")}
             style="secondary"
             onClick={() => setIsModalOpen(false)}
           />

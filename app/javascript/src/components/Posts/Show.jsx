@@ -2,6 +2,7 @@ import React from "react";
 
 import { Container, PageLoader, PageHeader } from "components/commons";
 import { useShowPost } from "hooks/reactQuery/usePostsApi";
+import { t } from "i18next";
 import Logger from "js-logger";
 import { Edit } from "neetoicons";
 import { Avatar, Button, Tag, Typography } from "neetoui";
@@ -54,7 +55,7 @@ const ShowPost = () => {
                 size="large"
                 style="text"
                 to={`/posts/${slug}/edit`}
-                tooltipProps={{ content: "Edit Task" }}
+                tooltipProps={{ content: t("labels.editPost") }}
               />
             </PageHeader>
             <div className="flex items-center gap-4">
