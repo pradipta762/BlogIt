@@ -4,13 +4,13 @@ class PostsController < ApplicationController
   before_action :load_post!, only: %i[show update destroy]
 
   def index
-    @posts =
-      current_user.posts.published
-        .includes(:user, :categories, :organization)
-        .where(organization_id: current_organization.id)
-        .order(created_at: :desc)
-        .page(params[:page]&.to_i || Constants::DEFAULT_PAGE_NUMBER)
-        .per(Constants::DEFAULT_PAGE_SIZE)
+    @posts = FilterPostsBasedOnCategoriesService.new(
+      params: params,
+      current_organization: @current_organization
+      ).process!
+      .order(created_at: :desc)
+      .page(params[:page]&.to_i || Constants::DEFAULT_PAGE_NUMBER)
+      .per(Constants::DEFAULT_PAGE_SIZE)
     render :index
   end
 
@@ -37,7 +37,7 @@ class PostsController < ApplicationController
   private
 
     def load_post!
-      @post = current_user.posts.find_by!(slug: params[:slug])
+      @post = current_organization.posts.find_by!(slug: params[:slug])
     end
 
     def post_params

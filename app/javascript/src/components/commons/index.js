@@ -4,5 +4,14 @@ import PageHeader from "./PageHeader";
 import PageLoader from "./PageLoader";
 import PrivateRoute from "./PrivateRoute";
 import Toastr from "./Toastr";
+import withT from "./WithT";
 
-export { Container, PageHeader, Toastr, PageLoader, PrivateRoute, EmptyBlogs };
+export {
+  Container,
+  PageHeader,
+  Toastr,
+  PageLoader,
+  PrivateRoute,
+  EmptyBlogs,
+  withT,
+};

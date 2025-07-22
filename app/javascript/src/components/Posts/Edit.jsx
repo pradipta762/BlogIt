@@ -6,7 +6,7 @@ import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useUpdatePost, useShowPost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
 import { ExternalLink, MenuHorizontal } from "neetoicons";
-import { Button, Dropdown } from "neetoui";
+import { Button, Dropdown, Alert } from "neetoui";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
@@ -21,6 +21,7 @@ const EditPost = ({ history }) => {
   const [description, setDescription] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [status, setStatus] = useState(POST_STATUS.PUBLISHED);
+  const [shouldShowDeleteAlert, setShouldShowDeleteAlert] = useState(false);
 
   const { t } = useTranslation();
 
@@ -85,41 +86,57 @@ const EditPost = ({ history }) => {
   };
 
   return (
-    <Container className="w-full">
-      <div className="flex flex-col gap-y-8">
-        <PageHeader style="h1" title={t("titles.editPost")}>
-          <div className="flex items-center space-x-4">
-            <Button
-              icon={ExternalLink}
-              style="text"
-              to={`/posts/${slug}/show`}
-            />
-            <Button label="Cancel" style="secondary" onClick={handleCancel} />
-            <ActionDropdownMenu {...{ status, setStatus, handleSubmit }} />
-            <Dropdown buttonStyle="text" icon={MenuHorizontal}>
-              <Dropdown.Menu>
-                <Dropdown.MenuItem.Button style="danger" onClick={destroyPost}>
-                  {t("labels.delete")}
-                </Dropdown.MenuItem.Button>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-        </PageHeader>
-        <Form
-          {...{
-            categoryOptions,
-            title,
-            setTitle,
-            description,
-            setDescription,
-            selectedCategories,
-            handleSubmit,
-            handleCategoryChange,
-          }}
-          isLoading={isPostDetailsLoading || isPostUpdating}
-        />
-      </div>
-    </Container>
+    <>
+      <Container className="w-full">
+        <div className="flex flex-col gap-y-8">
+          <PageHeader style="h1" title={t("titles.editPost")}>
+            <div className="flex items-center space-x-4">
+              <Button
+                icon={ExternalLink}
+                style="text"
+                to={`/posts/${slug}/show`}
+              />
+              <Button
+                label={t("labels.cancel")}
+                style="secondary"
+                onClick={handleCancel}
+              />
+              <ActionDropdownMenu {...{ status, setStatus, handleSubmit }} />
+              <Dropdown buttonStyle="text" icon={MenuHorizontal}>
+                <Dropdown.Menu>
+                  <Dropdown.MenuItem.Button
+                    style="danger"
+                    onClick={() => setShouldShowDeleteAlert(true)}
+                  >
+                    {t("labels.delete")}
+                  </Dropdown.MenuItem.Button>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          </PageHeader>
+          <Form
+            {...{
+              categoryOptions,
+              title,
+              setTitle,
+              description,
+              setDescription,
+              selectedCategories,
+              handleSubmit,
+              handleCategoryChange,
+            }}
+            isLoading={isPostDetailsLoading || isPostUpdating}
+          />
+        </div>
+      </Container>
+      <Alert
+        isOpen={shouldShowDeleteAlert}
+        message={t("messages.deletePost")}
+        title={t("titles.deletePost")}
+        onClose={() => setShouldShowDeleteAlert(false)}
+        onSubmit={destroyPost}
+      />
+    </>
   );
 };
 
