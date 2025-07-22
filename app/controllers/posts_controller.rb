@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @posts =
-      current_user.posts.published
+      current_organization.posts.published
         .includes(:user, :categories, :organization)
         .where(organization_id: current_organization.id)
         .order(created_at: :desc)
@@ -37,7 +37,7 @@ class PostsController < ApplicationController
   private
 
     def load_post!
-      @post = current_user.posts.find_by!(slug: params[:slug])
+      @post = current_organization.posts.find_by!(slug: params[:slug])
     end
 
     def post_params

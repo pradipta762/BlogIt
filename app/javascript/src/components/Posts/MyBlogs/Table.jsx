@@ -6,42 +6,19 @@ import { Dropdown, Table, Tooltip } from "neetoui";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-import { POST_STATUS } from "./constants";
+import { COLUMN_DATA } from "./constant";
 
-const PostTable = ({ posts, deletePost, updatePostStatus }) => {
+import { POST_STATUS } from "../constants";
+
+const PostTable = ({ posts, deletePost, updatePostStatus, visibleColumns }) => {
   const { t } = useTranslation();
-  const columnData = [
-    {
-      title: "TITLE",
-      dataIndex: "title",
-      key: "title",
-      width: 450,
-    },
-    {
-      title: "CATEGORY",
-      dataIndex: "categories",
-      key: "categories",
-      width: 300,
-    },
-    {
-      title: "LAST PUBLISHED AT",
-      dataIndex: "last_published_at",
-      key: "last_published_at",
-      width: 250,
-    },
-    {
-      title: "STATUS",
-      dataIndex: "status",
-      key: "status",
-      width: 200,
-    },
-    {
-      title: "",
-      dataIndex: "action",
-      key: "action",
-      width: 100,
-    },
-  ];
+
+  const filteredColumns = COLUMN_DATA.filter(
+    column =>
+      column.key === "title" ||
+      column.key === "action" ||
+      visibleColumns[column.key]
+  );
 
   const rowData = posts.map(post => ({
     id: post.slug,
@@ -86,7 +63,7 @@ const PostTable = ({ posts, deletePost, updatePostStatus }) => {
     ),
   }));
 
-  return <Table columnData={columnData} rowData={rowData} />;
+  return <Table columnData={filteredColumns} rowData={rowData} />;
 };
 
 export default PostTable;

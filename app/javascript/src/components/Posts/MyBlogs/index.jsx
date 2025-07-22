@@ -1,33 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 
 import postsApi from "apis/posts";
-import {
-  Container,
-  PageLoader,
-  PageHeader,
-  EmptyBlogs,
-} from "components/commons";
+import { Container, PageLoader, EmptyBlogs } from "components/commons";
 import { useFetchMyPosts, useUpdatePost } from "hooks/reactQuery/usePostsApi";
 import useQueryParams from "hooks/useQueryParams";
 import Logger from "js-logger";
-import { Pagination, Typography } from "neetoui";
+import { Pagination } from "neetoui";
 import { isEmpty } from "ramda";
-import { Trans, useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
 import useCategoryStore from "stores/useCategoryStore";
 import { buildUrl } from "utils/url";
 
+import Header from "./Header";
 import PostTable from "./Table";
 
-import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from "../Dashboard/constants";
+import {
+  DEFAULT_PAGE_NUMBER,
+  DEFAULT_PAGE_SIZE,
+} from "../../Dashboard/constants";
 
 const MyPost = () => {
+  const [visibleColumns, setVisibleColumns] = useState({
+    title: true,
+    categories: true,
+    last_published_at: true,
+    status: true,
+    actions: true,
+  });
+
   const history = useHistory();
 
   const { page } = useQueryParams();
-
-  const { t } = useTranslation();
 
   const currentPage = Number(page) || DEFAULT_PAGE_NUMBER;
 
@@ -80,15 +84,14 @@ const MyPost = () => {
     <Container className="flex min-h-screen w-full flex-col justify-between space-y-4">
       <div className="flex w-full flex-col space-y-4">
         <div className="flex w-full flex-col justify-between gap-2">
-          <PageHeader style="h1" title={t("titles.myBlogPosts")} />
-          <Typography>
-            <Trans i18nKey="totalArticles" values={{ totalPosts }} />
-          </Typography>
+          <Header {...{ totalPosts, visibleColumns, setVisibleColumns }} />
         </div>
         {isLoading ? (
           <PageLoader />
         ) : (
-          <PostTable {...{ posts, deletePost, updatePostStatus }} />
+          <PostTable
+            {...{ posts, deletePost, updatePostStatus, visibleColumns }}
+          />
         )}
       </div>
       {meta.total_pages > 1 && (
