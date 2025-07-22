@@ -5,6 +5,11 @@ export const DROPDOWN_MENU = [
   { key: "status", value: "Status" },
 ];
 
+export const statusOptions = [
+  { label: "Draft", value: "draft" },
+  { label: "Published", value: "published" },
+];
+
 export const COLUMN_DATA = [
   {
     title: "TITLE",
