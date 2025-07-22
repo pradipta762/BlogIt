@@ -15,7 +15,7 @@ export const COLUMN_DATA = [
     title: "TITLE",
     dataIndex: "title",
     key: "title",
-    width: 450,
+    width: 400,
   },
   {
     title: "CATEGORY",
@@ -33,7 +33,7 @@ export const COLUMN_DATA = [
     title: "STATUS",
     dataIndex: "status",
     key: "status",
-    width: 200,
+    width: 150,
   },
   {
     title: "",

@@ -10,7 +10,15 @@ import { COLUMN_DATA } from "./constant";
 
 import { POST_STATUS } from "../constants";
 
-const PostTable = ({ posts, deletePost, updatePostStatus, visibleColumns }) => {
+const PostTable = ({
+  posts,
+  deletePost,
+  updatePostStatus,
+  visibleColumns,
+  totalPosts,
+  selectedRowKeys,
+  setSelectedRowKeys,
+}) => {
   const { t } = useTranslation();
 
   const filteredColumns = COLUMN_DATA.filter(
@@ -19,6 +27,8 @@ const PostTable = ({ posts, deletePost, updatePostStatus, visibleColumns }) => {
       column.key === "action" ||
       visibleColumns[column.key]
   );
+
+  const handleRowSelect = selectedKey => setSelectedRowKeys(selectedKey);
 
   const rowData = posts.map(post => ({
     id: post.slug,
@@ -63,7 +73,16 @@ const PostTable = ({ posts, deletePost, updatePostStatus, visibleColumns }) => {
     ),
   }));
 
-  return <Table columnData={filteredColumns} rowData={rowData} />;
+  return (
+    <Table
+      rowSelection
+      columnData={filteredColumns}
+      rowData={rowData}
+      selectedRowKeys={selectedRowKeys}
+      totalCount={totalPosts}
+      onRowSelect={handleRowSelect}
+    />
+  );
 };
 
 export default PostTable;

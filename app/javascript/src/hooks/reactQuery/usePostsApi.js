@@ -48,10 +48,35 @@ export const useUpdatePost = ({ onSuccess, onError }) => {
     mutationFn: ({ slug, payload }) => postsApi.update({ slug, payload }),
     onSuccess: (...args) => {
       queryClient.invalidateQueries([QUERY_KEYS.POST]);
+      queryClient.invalidateQueries([QUERY_KEYS.MYPOSTS]);
       onSuccess?.(...args);
     },
     onError: (...args) => {
       onError?.(...args);
+    },
+  });
+};
+
+export const useBulkUpdatePosts = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ slugs, status }) => postsApi.bulkUpdate({ slugs, status }),
+    onSuccess: (...args) => {
+      queryClient.invalidateQueries([QUERY_KEYS.MYPOSTS]);
+      onSuccess?.(...args);
+    },
+  });
+};
+
+export const useBulkDeletePosts = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ slugs }) => postsApi.bulkDestroy({ slugs }),
+    onSuccess: (...args) => {
+      queryClient.invalidateQueries([QUERY_KEYS.MYPOSTS]);
+      onSuccess?.(...args);
     },
   });
 };

@@ -3,8 +3,10 @@
     "newPost": "Add a new post",
     "editPost": "Edit post",
     "publish": "Publish",
+    "published": "Published",
     "unpublish": "Unpublish",
     "saveAsDraft": "Save as draft",
+    "draft": "Draft",
     "delete": "Delete",
     "title": "Title",
     "description": "Description",
@@ -22,7 +24,11 @@
     "organization": "Organization",
     "password": "Password",
     "passwordConfirmation": "Password confirmation",
-    "emptyCategory": "No categories present"
+    "emptyCategory": "No categories present",
+    "changeStatus": "Change status",
+    "status": "Status",
+    "clearFilter": "Clear filters",
+    "done": "Done"
   },
   "titles": {
     "blogPost": "Blog posts",
@@ -30,7 +36,11 @@
     "editPost": "Edit blog post",
     "category": "Categories",
     "newCategory": "New category",
-    "myBlogPosts": "My blog posts"
+    "myBlogPosts": "My blog posts",
+    "deletePost": "Delete post",
+    "deleteBulkPosts": "Delete posts",
+    "filters": "Filters",
+    "results": "<strong>{{totalPosts}} results for {{title}}</strong>"
   },
   "errors": {
     "noBlogFound": "You have not posted any blogs. If you want to post one, then click below."
@@ -44,5 +54,10 @@
     "organization": "Select your organization",
     "password": "********"
   },
-  "totalArticles": "{{totalPosts}} articles"
+  "messages": {
+    "deletePost": "You are deleting this post. This can't be undone.",
+    "deleteBulkPosts": "You are deleting <strong>{{numberOfSelectedRows}} posts</strong>. This can't be undone."
+  },
+  "totalArticles": "{{totalPosts}} articles",
+  "totalSelectedArticles": "<strong>{{numberOfSelectedRows}} articles </strong> selected of {{totalPosts}}"
 }

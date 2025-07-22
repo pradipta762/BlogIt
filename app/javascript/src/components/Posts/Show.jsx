@@ -48,7 +48,9 @@ const ShowPost = () => {
               title={
                 <div className="flex items-center gap-4">
                   <span>{post?.title}</span>
-                  {isDraftPost && <Tag label="Draft" style="danger" />}
+                  {isDraftPost && (
+                    <Tag label={t("labels.draft")} style="danger" />
+                  )}
                 </div>
               }
             >

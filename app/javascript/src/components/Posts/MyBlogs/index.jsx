@@ -3,7 +3,12 @@ import React, { useState } from "react";
 import postsApi from "apis/posts";
 import { Container, PageLoader, EmptyBlogs } from "components/commons";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
-import { useFetchMyPosts, useUpdatePost } from "hooks/reactQuery/usePostsApi";
+import {
+  useFetchMyPosts,
+  useUpdatePost,
+  useBulkUpdatePosts,
+  useBulkDeletePosts,
+} from "hooks/reactQuery/usePostsApi";
 import useQueryParams from "hooks/useQueryParams";
 import Logger from "js-logger";
 import { Pagination } from "neetoui";
@@ -32,9 +37,11 @@ const MyPost = () => {
 
   const [filters, setFilters] = useState({
     title: "",
-    status: {},
+    status: { value: "", label: "" },
     category_ids: [],
   });
+
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const history = useHistory();
 
@@ -44,6 +51,7 @@ const MyPost = () => {
 
   const { data, isLoading } = useFetchMyPosts(currentPage, {
     ...filters,
+    status: filters.status.value,
   });
 
   const { data: categories } = useFetchCategories();
@@ -60,6 +68,14 @@ const MyPost = () => {
     onError: error => {
       Logger.error(error);
     },
+  });
+
+  const { mutate: updateBulkPosts } = useBulkUpdatePosts({
+    onSuccess: () => {},
+  });
+
+  const { mutate: deleteBulkPosts } = useBulkDeletePosts({
+    onSuccess: () => {},
   });
 
   const handlePageNavigation = newPage => {
@@ -85,6 +101,27 @@ const MyPost = () => {
     });
   };
 
+  const handleBulkUpdate = status =>
+    updateBulkPosts(
+      {
+        slugs: selectedRowKeys,
+        status,
+      },
+      {
+        onSuccess: () => setSelectedRowKeys([]),
+      }
+    );
+
+  const handleBulkDelete = () =>
+    deleteBulkPosts(
+      {
+        slugs: selectedRowKeys,
+      },
+      {
+        onSuccess: () => setSelectedRowKeys([]),
+      }
+    );
+
   if (isEmpty(posts)) {
     return <EmptyBlogs />;
   }
@@ -101,6 +138,9 @@ const MyPost = () => {
               filters,
               setFilters,
               categoryOptions,
+              selectedRowKeys,
+              handleBulkDelete,
+              handleBulkUpdate,
             }}
           />
         </div>
@@ -108,7 +148,15 @@ const MyPost = () => {
           <PageLoader />
         ) : (
           <PostTable
-            {...{ posts, deletePost, updatePostStatus, visibleColumns }}
+            {...{
+              posts,
+              deletePost,
+              updatePostStatus,
+              visibleColumns,
+              totalPosts,
+              selectedRowKeys,
+              setSelectedRowKeys,
+            }}
           />
         )}
       </div>
