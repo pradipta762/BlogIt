@@ -15,7 +15,7 @@ class FilterPostsBasedOnCategoriesService
   private
 
     def filter_posts
-      scope = current_organization.posts.published.includes(:user, :organization, :categories)
+      scope = current_organization.posts.published.includes(:user, :organization, :categories, :votes)
         .where(organization_id: current_organization.id)
 
       scope = filter_by_categories(scope)

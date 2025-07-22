@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.posts @posts do |post|
-  json.extract! post, :id, :title, :description, :created_at, :updated_at, :slug, :status
+  json.extract! post, :id, :title, :description, :created_at, :updated_at, :slug, :status, :is_bloggable
 
   json.user do
     json.extract! post.user, :id, :name, :email
@@ -10,6 +10,9 @@ json.posts @posts do |post|
   json.categories post.categories do |category|
     json.extract! category, :id, :name
   end
+
+  json.net_votes post.net_votes
+  json.user_vote post.votes.find_by(user_id: post.user.id)&.vote_type
 end
 
 json.meta do
