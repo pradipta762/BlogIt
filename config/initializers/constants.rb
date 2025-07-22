@@ -11,4 +11,5 @@ module Constants
   VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
   MAX_EMAIL_LENGTH = 255
   MIN_PASSWORD_LENGTH = 6
+  VOTE_THRESHOLD = 1
 end
