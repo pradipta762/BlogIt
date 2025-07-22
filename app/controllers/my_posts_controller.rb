@@ -2,8 +2,11 @@
 
 class MyPostsController < ApplicationController
   def index
-    @posts = current_user.posts.includes(:user, :categories, :organization)
-      .where(organization_id: current_organization.id)
+    @posts = FilterMypostsService.new(
+      params: params,
+      current_user: @current_user,
+      current_organization: @current_organization
+    ).process!
       .order(updated_at: :desc)
       .page(params[:page]&.to_i || Constants::DEFAULT_PAGE_NUMBER)
       .per(Constants::DEFAULT_PAGE_SIZE)

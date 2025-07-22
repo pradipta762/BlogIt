@@ -32,7 +32,7 @@ const MyPost = () => {
 
   const [filters, setFilters] = useState({
     title: "",
-    status: null,
+    status: {},
     category_ids: [],
   });
 

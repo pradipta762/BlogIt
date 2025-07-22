@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { PageHeader } from "components/commons";
 import { t } from "i18next";
-import Logger from "js-logger";
 import { Filter } from "neetoicons";
 import {
   ActionDropdown,
@@ -25,7 +24,7 @@ const Header = ({
   setFilters,
   categoryOptions,
 }) => {
-  const [shouldShowFilterPane, setShouldShowFilterPane] = useState(true);
+  const [shouldShowFilterPane, setShouldShowFilterPane] = useState(false);
   const handleShowFilterPane = () => setShouldShowFilterPane(prev => !prev);
 
   const handleToggleColumn = key => {
@@ -36,8 +35,6 @@ const Header = ({
     }));
   };
 
-  Logger.info(filters.category_ids);
-  Logger.info(categoryOptions);
   const categoryValues = () =>
     categoryOptions.filter(category =>
       filters.category_ids.includes(category.value)
@@ -51,7 +48,7 @@ const Header = ({
   const handleClearFilter = () => {
     setFilters({
       title: "",
-      status: null,
+      status: { value: "" },
       category_ids: [],
     });
   };
@@ -114,12 +111,11 @@ const Header = ({
               onChange={selectedOption => handleCategoryChange(selectedOption)}
             />
             <Select
+              isClearable
               className="w-full"
               label="Status"
               options={statusOptions}
-              value={statusOptions.find(
-                option => option.value === filters.status
-              )}
+              value={filters.status.value}
               onChange={statusOption =>
                 setFilters({ ...filters, status: statusOption.value })
               }
@@ -137,6 +133,7 @@ const Header = ({
           <Button
             label="Clear filters"
             style="secondary"
+            tyep="reset"
             onClick={handleClearFilter}
           />
         </Pane.Footer>
