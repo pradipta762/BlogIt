@@ -21,6 +21,7 @@ const alias = {
   translations: absolutePath("src/translations"),
   assets: absolutePath("../assets"),
   routes: absolutePath("src/routes"),
+  channels: absolutePath("src/channels"),
   neetoui: "@bigbinary/neetoui",
   neetoicons: "@bigbinary/neeto-icons",
 };

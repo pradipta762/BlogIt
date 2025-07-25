@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Container, PageLoader, PageHeader } from "components/commons";
 import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
-import { Edit } from "neetoicons";
+import { Edit, Download } from "neetoicons";
 import { Avatar, Button, Tag, Typography } from "neetoui";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import {
   useHistory,
   useParams,
@@ -14,9 +14,12 @@ import routes from "routes";
 
 import List from "./Categories/List";
 import { POST_STATUS } from "./constants";
+import DownloadPost from "./Download";
 import { formatDate } from "./utils";
 
 const ShowPost = () => {
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
+
   const { slug } = useParams();
   const history = useHistory();
 
@@ -47,20 +50,29 @@ const ShowPost = () => {
               style="h2"
               title={
                 <div className="flex items-center gap-4">
-                  <span>{post?.title}</span>
+                  <Typography style="h1">{post?.title}</Typography>
                   {isDraftPost && (
                     <Tag label={t("labels.draft")} style="danger" />
                   )}
                 </div>
               }
             >
-              <Button
-                icon={Edit}
-                size="large"
-                style="text"
-                to={`/posts/${slug}/edit`}
-                tooltipProps={{ content: t("labels.editPost") }}
-              />
+              <div className="space-x-4">
+                <Button
+                  icon={Download}
+                  size="large"
+                  style="text"
+                  tooltipProps={{ content: t("labels.downloadPost") }}
+                  onClick={() => setIsDownloadModalOpen(true)}
+                />
+                <Button
+                  icon={Edit}
+                  size="large"
+                  style="text"
+                  to={`/posts/${slug}/edit`}
+                  tooltipProps={{ content: t("labels.editPost") }}
+                />
+              </div>
             </PageHeader>
             <div className="flex items-center gap-4">
               <Avatar
@@ -80,6 +92,18 @@ const ShowPost = () => {
           </div>
         </div>
       </div>
+      {isDownloadModalOpen && (
+        <DownloadPost
+          {...{ setIsDownloadModalOpen }}
+          description={
+            <Trans
+              components={{ strong: <strong /> }}
+              i18nKey="generatePdf"
+              values={{ postTitle: post.title }}
+            />
+          }
+        />
+      )}
     </Container>
   );
 };

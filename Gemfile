@@ -8,7 +8,9 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.4"
 
 gem "sprockets-rails"
 
-gem "sqlite3", "~> 1.4"
+gem "sqlite3", "~> 1.4", group: [:development, :test]
+
+gem "pg", group: [:production]
 
 gem "puma", ">= 5.0"
 
@@ -27,6 +29,10 @@ gem "bcrypt", "~> 3.1.7"
 gem "kaminari"
 
 gem "simplecov", require: false, group: :test
+
+gem "redis"
+
+gem "sidekiq"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
@@ -53,3 +59,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# PDF generation gem
+gem "wicked_pdf"
+# wicked_pdf uses the following binary
+gem "wkhtmltopdf-binary"
