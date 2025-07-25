@@ -28,6 +28,8 @@ gem "kaminari"
 
 gem "simplecov", require: false, group: :test
 
+gem "sidekiq", "8.0.2"
+
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
 
