@@ -5,9 +5,13 @@ module ApiResponders
 
   private
 
-    def render_error(message, status = :unprocessable_entity, context = {})
-      is_exception = message.kind_of?(StandardError)
-      error_message = is_exception ? message.record&.errors_to_sentence : message
+    def render_error(error, status = :unprocessable_entity, context = {})
+      error_message = error
+      is_exception = error.kind_of?(StandardError)
+      if is_exception
+        is_having_record = error.methods.include? "record"
+        error_message = is_having_record ? error.record.errors_to_sentence : error.message
+      end
       render status:, json: { error: error_message }.merge(context)
     end
 

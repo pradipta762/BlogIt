@@ -13,17 +13,14 @@ module ApiExceptions
       when -> (e) { e.message.include?("PG::") || e.message.include?("SQLite3::") }
         handle_database_level_exception(exception)
 
-      when Pundit::NotAuthorizedError
-        handle_authorization_error
-
       when ActionController::ParameterMissing
         render_error(exception, :internal_server_error)
 
       when ActiveRecord::RecordNotFound
-        render_error(t("not_found", entity: exception.model), :not_found)
+        render_error("Couldn't find #{exception.model}", :not_found)
 
       when ActiveRecord::RecordNotUnique
-        render_error(exception)
+        render_error(exception.message)
 
       when ActiveModel::ValidationError, ActiveRecord::RecordInvalid, ArgumentError
         error_message = exception.message.gsub("Validation failed: ", "")
@@ -35,11 +32,7 @@ module ApiExceptions
     end
 
     def handle_database_level_exception(exception)
-      handle_generic_exception(exception, :internal_server_error)
-    end
-
-    def handle_authorization_error
-      render_error(t("authorization.denied"), :forbidden)
+      handle_generic_exception(exception, :unprocessable_entity)
     end
 
     def handle_generic_exception(exception, status = :internal_server_error)

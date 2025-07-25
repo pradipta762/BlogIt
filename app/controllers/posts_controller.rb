@@ -2,7 +2,6 @@
 
 class PostsController < ApplicationController
   before_action :load_post!, only: %i[show update destroy]
-  after_action :verify_authorized, except: :index
 
   def index
     @posts = FilterPostsBasedOnCategoriesService.new(

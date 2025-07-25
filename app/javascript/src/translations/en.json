@@ -28,7 +28,8 @@
     "changeStatus": "Change status",
     "status": "Status",
     "clearFilter": "Clear filters",
-    "done": "Done"
+    "done": "Done",
+    "downloadPost": "Download post"
   },
   "titles": {
     "blogPost": "Blog posts",
@@ -59,5 +60,6 @@
     "deleteBulkPosts": "You are deleting <strong>{{numberOfSelectedRows}} posts</strong>. This can't be undone."
   },
   "totalArticles": "{{totalPosts}} articles",
-  "totalSelectedArticles": "<strong>{{numberOfSelectedRows}} articles </strong> selected of {{totalPosts}}"
+  "totalSelectedArticles": "<strong>{{numberOfSelectedRows}} articles </strong> selected of {{totalPosts}}",
+  "generatePdf": "Generating pdf for <strong>{{postTitle}}</strong>"
 }

@@ -18,6 +18,7 @@ module Authenticable
         auth_token)
       if is_valid_token
         @current_user = user
+        @current_organization = user.organization
       else
         render_error(t("session.could_not_auth"), :unauthorized)
       end

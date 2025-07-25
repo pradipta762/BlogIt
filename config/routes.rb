@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   constraints(lambda { |req| req.format == :json }) do
     resources :posts, except: %i[new edit], param: :slug do
       resource :vote, only: %i[create destroy], controller: :votes
+      resource :pdf, only: %i[create], module: :posts, controller: :pdfs do
+        get :download
+      end
     end
     resources :my_posts, only: [:index], path: "my-posts" do
       collection do
