@@ -1,34 +1,38 @@
+import { API_ENDPOINTS } from "constants/apiEndPoints";
+
 import axios from "axios";
 
-const fetch = (params = {}) => axios.get("/posts", { params });
+const fetch = (params = {}) => axios.get(API_ENDPOINTS.POSTS, { params });
 
-const fetchMyPosts = (params = {}) => axios.get("/my-posts", { params });
+const fetchMyPosts = (params = {}) =>
+  axios.get(API_ENDPOINTS.MY_POSTS, { params });
 
 const create = payload =>
-  axios.post("/posts", {
+  axios.post(API_ENDPOINTS.POSTS, {
     post: payload,
   });
 
-const show = slug => axios.get(`/posts/${slug}`);
+const show = slug => axios.get(`${API_ENDPOINTS.POSTS}/${slug}`);
 
 const update = ({ slug, payload }) =>
-  axios.put(`/posts/${slug}`, { post: payload });
+  axios.put(`${API_ENDPOINTS.POSTS}/${slug}`, { post: payload });
 
-const destroy = slug => axios.delete(`/posts/${slug}`);
+const destroy = slug => axios.delete(`${API_ENDPOINTS.POSTS}/${slug}`);
 
 const bulkUpdate = ({ slugs, status }) =>
-  axios.patch("my-posts/bulk_update", {
+  axios.patch(`${API_ENDPOINTS.MY_POSTS}/bulk_update`, {
     slugs,
     status,
   });
 
 const bulkDestroy = ({ slugs }) =>
-  axios.delete("my-posts/bulk_destroy", { data: { slugs } });
+  axios.delete(`${API_ENDPOINTS.MY_POSTS}/bulk_destroy`, { data: { slugs } });
 
-const generatePdf = slug => axios.post(`/posts/${slug}/pdf`, {});
+const generatePdf = slug =>
+  axios.post(`${API_ENDPOINTS.POSTS}/${slug}/pdf`, {});
 
 const downloadPdf = slug =>
-  axios.get(`/posts/${slug}/pdf/download`, {
+  axios.get(`${API_ENDPOINTS.POSTS}/${slug}/pdf/download`, {
     responseType: "blob",
   });
 
