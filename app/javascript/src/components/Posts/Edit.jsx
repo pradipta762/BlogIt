@@ -89,7 +89,7 @@ const EditPost = ({ history }) => {
     <>
       <Container className="w-full">
         <div className="flex flex-col gap-y-8">
-          <PageHeader style="h1" title={t("titles.editPost")}>
+          <PageHeader style="h1" title={t("titles.post.edit")}>
             <div className="flex items-center space-x-4">
               <Button
                 icon={ExternalLink}
@@ -132,7 +132,7 @@ const EditPost = ({ history }) => {
       <Alert
         isOpen={shouldShowDeleteAlert}
         message={t("messages.deletePost")}
-        title={t("titles.deletePost")}
+        title={t("titles.post.delete")}
         onClose={() => setShouldShowDeleteAlert(false)}
         onSubmit={destroyPost}
       />

@@ -34,7 +34,7 @@ const Signup = ({
           className="mt-6 text-center text-3xl font-extrabold
         leading-9 text-gray-800"
         >
-          {t("labels.signup")}
+          {t("labels.auth.signup")}
         </Typography>
         <div className="text-center">
           <Link
@@ -42,39 +42,39 @@ const Signup = ({
             className="mt-2 text-center text-sm font-medium
             text-indigo-600 "
           >
-            {t("labels.orlogin")}
+            {t("labels.auth.orLogin")}
           </Link>
         </div>
         <form className="mt-8 flex flex-col gap-y-6" onSubmit={handleSubmit}>
           <Input
-            label={t("labels.name")}
+            label={t("labels.auth.name")}
             placeholder={t("placeholders.name")}
             size="large"
             onChange={e => setName(e.target.value)}
           />
           <Input
-            label={t("labels.email")}
+            label={t("labels.auth.email")}
             placeholder={t("placeholders.email")}
             size="large"
             type="email"
             onChange={e => setEmail(e.target.value)}
           />
           <Select
-            label={t("labels.organization")}
+            label={t("labels.auth.organization")}
             options={organizationOptions}
             placeholder={t("placeholders.organization")}
             size="large"
             onChange={({ value }) => setOrganizationId(value)}
           />
           <Input
-            label={t("labels.password")}
+            label={t("labels.auth.password")}
             placeholder={t("placeholders.password")}
             size="large"
             type="password"
             onChange={e => setPassword(e.target.value)}
           />
           <Input
-            label={t("labels.passwordConfirmation")}
+            label={t("labels.auth.passwordConfirmation")}
             placeholder={t("placeholders.password")}
             size="large"
             type="password"
@@ -82,7 +82,7 @@ const Signup = ({
           />
           <Button
             className="flex items-center justify-center bg-indigo-600 hover:bg-indigo-700"
-            label={t("labels.register")}
+            label={t("labels.auth.register")}
             size="large"
             type="submit"
           />

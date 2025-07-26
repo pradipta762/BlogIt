@@ -6,6 +6,7 @@ import { subscribeToPdfDownloadChannel } from "channels/pdfDownloadChannel";
 import FileSaver from "file-saver";
 import Logger from "js-logger";
 import { Modal, Typography } from "neetoui";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 import { ProgressBar, PageLoader } from "../commons";
@@ -19,6 +20,8 @@ const DownloadPost = ({ setIsDownloadModalOpen, description }) => {
 
   const { slug } = useParams();
 
+  const { t } = useTranslation();
+
   const generatePdf = async () => {
     try {
       await postsApi.generatePdf(slug);
@@ -31,7 +34,7 @@ const DownloadPost = ({ setIsDownloadModalOpen, description }) => {
     setIsLoading(true);
     try {
       const { data } = await postsApi.downloadPdf(slug);
-      FileSaver.saveAs(data, "post.pdf");
+      FileSaver.saveAs(data, `${slug}-blog.pdf`);
       setIsDownloadModalOpen(false);
     } catch (error) {
       Logger.error(error);
@@ -58,7 +61,7 @@ const DownloadPost = ({ setIsDownloadModalOpen, description }) => {
 
   useEffect(() => {
     if (progress === 100) {
-      setMessage("Saving pdf...");
+      setMessage(t("messages.savePdf"));
       setIsLoading(false);
       downloadPdf();
     }

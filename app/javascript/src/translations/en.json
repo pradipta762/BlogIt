@@ -1,7 +1,21 @@
 {
   "labels": {
-    "newPost": "Add a new post",
-    "editPost": "Edit post",
+    "post": {
+      "new": "Add a new post",
+      "edit": "Edit post"
+    },
+    "auth": {
+      "signin": "Sign in",
+      "signup": "Sign up",
+      "orLogin": "Or Login now",
+      "orRegister": "Or Register now",
+      "register": "Register",
+      "name": "Name",
+      "email": "Email",
+      "organization": "Organization",
+      "password": "Password",
+      "passwordConfirmation": "Password confirmation"
+    },
     "publish": "Publish",
     "published": "Published",
     "unpublish": "Unpublish",
@@ -14,32 +28,30 @@
     "categoryTitle": "Category title",
     "add": "Add",
     "cancel": "Cancel",
-    "signin": "Sign in",
-    "signup": "Sign up",
-    "orLogin": "Or Login now",
-    "orRegister": "Or Register now",
-    "register": "Register",
-    "name": "Name",
-    "email": "Email",
-    "organization": "Organization",
-    "password": "Password",
-    "passwordConfirmation": "Password confirmation",
     "emptyCategory": "No categories present",
     "changeStatus": "Change status",
     "status": "Status",
     "clearFilter": "Clear filters",
     "done": "Done",
-    "downloadPost": "Download post"
+    "blogIt": "Blog It",
+    "logOut": "Log out",
+    "toolTipProps": {
+      "downloadPost": "Download post",
+      "upvote": "Upvote (+1)",
+      "downvote": "Downvote (-1)"
+    }
   },
   "titles": {
-    "blogPost": "Blog posts",
-    "createPost": "New blog post",
-    "editPost": "Edit blog post",
+    "post": {
+      "blog": "Blog posts",
+      "create": "New blog post",
+      "edit": "Edit blog post",
+      "delete": "Delete post",
+      "deleteBulk": "Delete posts"
+    },
     "category": "Categories",
     "newCategory": "New category",
     "myBlogPosts": "My blog posts",
-    "deletePost": "Delete post",
-    "deleteBulkPosts": "Delete posts",
     "filters": "Filters",
     "results": "<strong>{{totalPosts}} results for {{title}}</strong>"
   },
@@ -57,7 +69,8 @@
   },
   "messages": {
     "deletePost": "You are deleting this post. This can't be undone.",
-    "deleteBulkPosts": "You are deleting <strong>{{numberOfSelectedRows}} posts</strong>. This can't be undone."
+    "deleteBulkPosts": "You are deleting <strong>{{numberOfSelectedRows}} posts</strong>. This can't be undone.",
+    "savePdf": "Saving pdf..."
   },
   "totalArticles": "{{totalPosts}} articles",
   "totalSelectedArticles": "<strong>{{numberOfSelectedRows}} articles </strong> selected of {{totalPosts}}",

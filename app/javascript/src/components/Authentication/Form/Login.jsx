@@ -18,26 +18,26 @@ const Login = ({ handleSubmit, setEmail, setPassword, loginPageLoading }) => {
           className="mt-6 text-center text-3xl font-extrabold leading-9 text-gray-700"
           style="h2"
         >
-          {t("labels.signin")}
+          {t("labels.auth.signin")}
         </Typography>
         <div className="text-center">
           <Link
             className="mt-2 text-sm font-medium text-indigo-500 transition duration-150 ease-in-out focus:underline focus:outline-none"
             to={routes.auth.signup}
           >
-            {t("labels.orRegister")}
+            {t("labels.auth.orRegister")}
           </Link>
         </div>
         <form className="mt-8 flex flex-col gap-y-6" onSubmit={handleSubmit}>
           <Input
-            label={t("labels.email")}
+            label={t("labels.auth.email")}
             placeholder={t("placeholders.email")}
             size="large"
             type="email"
             onChange={({ target: { value } }) => setEmail(value)}
           />
           <Input
-            label={t("labels.password")}
+            label={t("labels.auth.password")}
             placeholder={t("placeholders.password")}
             size="large"
             type="password"
@@ -45,7 +45,7 @@ const Login = ({ handleSubmit, setEmail, setPassword, loginPageLoading }) => {
           />
           <Button
             className="flex items-center justify-center bg-indigo-600 hover:bg-indigo-700"
-            label={t("labels.signin")}
+            label={t("labels.auth.signin")}
             size="large"
             type="submit"
           />

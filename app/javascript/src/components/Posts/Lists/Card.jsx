@@ -3,6 +3,7 @@ import React from "react";
 import { useVote } from "hooks/reactQuery/useVotesApi";
 import { Up, Down } from "neetoicons";
 import { Typography, Button, Tag } from "neetoui";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import List from "../Categories/List";
@@ -22,6 +23,8 @@ const Card = ({
 
   const { mutate: vote } = useVote({});
 
+  const { t } = useTranslation();
+
   const handleUpvote = () => vote({ slug, vote_type: "upvote" });
   const handleDownvote = () => vote({ slug, vote_type: "downvote" });
 
@@ -34,7 +37,7 @@ const Card = ({
             style="h2"
           >
             {title}
-            {is_bloggable && <Tag label="Blog It" style="success" />}
+            {is_bloggable && <Tag label={t("labels.blogIt")} style="success" />}
           </Typography>
         </Link>
         <List {...{ categories }} />
@@ -54,7 +57,7 @@ const Card = ({
           style="text"
           tooltipProps={{
             position: "top",
-            content: "Upvote (+1)",
+            content: t("labels.toolTipProps.upvote"),
           }}
           onClick={handleUpvote}
         />
@@ -65,7 +68,7 @@ const Card = ({
           style="text"
           tooltipProps={{
             position: "bottom",
-            content: "Downvote (-1)",
+            content: t("labels.toolTipProps.downvote"),
           }}
           onClick={handleDownvote}
         />

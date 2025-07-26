@@ -62,7 +62,9 @@ const ShowPost = () => {
                   icon={Download}
                   size="large"
                   style="text"
-                  tooltipProps={{ content: t("labels.downloadPost") }}
+                  tooltipProps={{
+                    content: t("labels.toolTipProps.downloadPost"),
+                  }}
                   onClick={() => setIsDownloadModalOpen(true)}
                 />
                 <Button
@@ -70,7 +72,7 @@ const ShowPost = () => {
                   size="large"
                   style="text"
                   to={`/posts/${slug}/edit`}
-                  tooltipProps={{ content: t("labels.editPost") }}
+                  tooltipProps={{ content: t("labels.post.edit") }}
                 />
               </div>
             </PageHeader>
