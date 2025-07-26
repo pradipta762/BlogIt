@@ -78,7 +78,7 @@ const ShowPost = () => {
                     icon={Edit}
                     size="large"
                     style="text"
-                    to={`/posts/${slug}/edit`}
+                    to={routes.posts.edit.replace(":slug", `${slug}`)}
                     tooltipProps={{ content: t("labels.post.edit") }}
                   />
                 )}

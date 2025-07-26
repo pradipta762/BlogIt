@@ -5,6 +5,7 @@ import { Up, Down } from "neetoicons";
 import { Typography, Button, Tag } from "neetoui";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import routes from "routes";
 
 import List from "../Categories/List";
 import { formatDate } from "../utils";
@@ -35,7 +36,7 @@ const Card = ({
   return (
     <div className="flex w-full items-center justify-between border-b border-gray-200 py-3">
       <div>
-        <Link to={`posts/${slug}/show`}>
+        <Link to={routes.posts.show.replace(":slug", `${slug}`)}>
           <Typography
             className="mb-3 flex w-max items-center  gap-3 border-b-2 border-white text-xl font-semibold transition delay-150 hover:border-indigo-100"
             style="h2"

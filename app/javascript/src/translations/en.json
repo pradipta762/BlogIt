@@ -44,7 +44,8 @@
       "myPosts": "My blog posts",
       "category": "Categories",
       "dashboard": "Dashboard"
-    }
+    },
+    "backToEdit": "Back to edit"
   },
   "titles": {
     "post": {
