@@ -13,7 +13,7 @@ const EmptyBlogs = withT(({ t }) => (
     </Typography>
     <Button
       className="bg-indigo-700 hover:bg-indigo-800"
-      label={t("labels.newPost")}
+      label={t("labels.post.new")}
       to={routes.posts.create}
     />
   </Container>

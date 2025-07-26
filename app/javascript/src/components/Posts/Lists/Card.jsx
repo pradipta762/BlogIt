@@ -3,7 +3,9 @@ import React from "react";
 import { useVote } from "hooks/reactQuery/useVotesApi";
 import { Up, Down } from "neetoicons";
 import { Typography, Button, Tag } from "neetoui";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import routes from "routes";
 
 import List from "../Categories/List";
 import { formatDate } from "../utils";
@@ -22,19 +24,25 @@ const Card = ({
 
   const { mutate: vote } = useVote({});
 
-  const handleUpvote = () => vote({ slug, vote_type: "upvote" });
-  const handleDownvote = () => vote({ slug, vote_type: "downvote" });
+  const { t } = useTranslation();
+
+  const handleVote = voteType => {
+    vote({
+      slug,
+      vote_type: voteType,
+    });
+  };
 
   return (
     <div className="flex w-full items-center justify-between border-b border-gray-200 py-3">
       <div>
-        <Link to={`posts/${slug}/show`}>
+        <Link to={routes.posts.show.replace(":slug", `${slug}`)}>
           <Typography
             className="mb-3 flex w-max items-center  gap-3 border-b-2 border-white text-xl font-semibold transition delay-150 hover:border-indigo-100"
             style="h2"
           >
             {title}
-            {is_bloggable && <Tag label="Blog It" style="success" />}
+            {is_bloggable && <Tag label={t("labels.blogIt")} style="success" />}
           </Typography>
         </Link>
         <List {...{ categories }} />
@@ -54,9 +62,9 @@ const Card = ({
           style="text"
           tooltipProps={{
             position: "top",
-            content: "Upvote (+1)",
+            content: t("labels.toolTipProps.upvote"),
           }}
-          onClick={handleUpvote}
+          onClick={() => handleVote("upvote")}
         />
         {net_votes}
         <Button
@@ -65,9 +73,9 @@ const Card = ({
           style="text"
           tooltipProps={{
             position: "bottom",
-            content: "Downvote (-1)",
+            content: t("labels.toolTipProps.downvote"),
           }}
-          onClick={handleDownvote}
+          onClick={() => handleVote("downvote")}
         />
       </div>
     </div>

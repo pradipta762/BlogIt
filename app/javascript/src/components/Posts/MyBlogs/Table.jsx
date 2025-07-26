@@ -5,6 +5,7 @@ import { MenuHorizontal } from "neetoicons";
 import { Dropdown, Table, Tooltip } from "neetoui";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import routes from "routes";
 
 import { COLUMN_DATA } from "./constant";
 
@@ -35,8 +36,8 @@ const PostTable = ({
     title: (
       <Tooltip content={post.title} position="top">
         <Link
-          className="truncate font-semibold text-indigo-700"
-          to={`/posts/${post.slug}/edit`}
+          className="inline-block w-[350px] truncate font-semibold text-indigo-700"
+          to={routes.posts.edit.replace(":slug", `${post.slug}`)}
         >
           {post.title}
         </Link>

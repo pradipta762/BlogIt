@@ -11,6 +11,7 @@ import {
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
+import { getFromLocalStorage } from "utils/storage";
 
 import List from "./Categories/List";
 import { POST_STATUS } from "./constants";
@@ -30,6 +31,9 @@ const ShowPost = () => {
   const updatedAt = formatDate(post?.updated_at);
 
   const isDraftPost = post?.status === POST_STATUS.DRAFT;
+
+  const loggedInUserId = getFromLocalStorage("authUserId");
+  const postOwnerId = post?.user?.id;
 
   if (error) {
     Logger.error(error);
@@ -57,21 +61,27 @@ const ShowPost = () => {
                 </div>
               }
             >
-              <div className="space-x-4">
-                <Button
-                  icon={Download}
-                  size="large"
-                  style="text"
-                  tooltipProps={{ content: t("labels.downloadPost") }}
-                  onClick={() => setIsDownloadModalOpen(true)}
-                />
-                <Button
-                  icon={Edit}
-                  size="large"
-                  style="text"
-                  to={`/posts/${slug}/edit`}
-                  tooltipProps={{ content: t("labels.editPost") }}
-                />
+              <div className="flex items-center space-x-4">
+                {!isDraftPost && (
+                  <Button
+                    icon={Download}
+                    size="large"
+                    style="text"
+                    tooltipProps={{
+                      content: t("labels.toolTipProps.downloadPost"),
+                    }}
+                    onClick={() => setIsDownloadModalOpen(true)}
+                  />
+                )}
+                {postOwnerId === loggedInUserId && (
+                  <Button
+                    icon={Edit}
+                    size="large"
+                    style="text"
+                    to={routes.posts.edit.replace(":slug", `${slug}`)}
+                    tooltipProps={{ content: t("labels.post.edit") }}
+                  />
+                )}
               </div>
             </PageHeader>
             <div className="flex items-center gap-4">

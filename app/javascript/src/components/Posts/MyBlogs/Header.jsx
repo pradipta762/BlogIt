@@ -218,7 +218,7 @@ const Header = ({
       </Pane>
       <Alert
         isOpen={shouldShowDeleteAlert}
-        title={t("titles.deleteBulkPosts")}
+        title={t("titles.post.deleteBulk")}
         message={
           <Trans
             components={{ strong: <strong /> }}

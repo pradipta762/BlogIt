@@ -1,7 +1,9 @@
+import { API_ENDPOINTS } from "constants/apiEndPoints";
+
 import axios from "axios";
 
 const create = (slug, vote_type) =>
-  axios.post(`posts/${slug}/vote`, {
+  axios.post(`${API_ENDPOINTS.POSTS}/${slug}/vote`, {
     vote: { vote_type },
   });
 

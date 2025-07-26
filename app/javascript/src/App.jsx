@@ -11,7 +11,13 @@ import { ToastContainer } from "react-toastify";
 import routes from "routes";
 import { getFromLocalStorage } from "utils/storage";
 
-import { CreatePost, EditPost, MyPost, ShowPost } from "./components/Posts";
+import {
+  CreatePost,
+  EditPost,
+  MyPost,
+  PreviewPost,
+  ShowPost,
+} from "./components/Posts";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -27,6 +33,7 @@ const App = () => {
           <Route exact component={ShowPost} path={routes.posts.show} />
           <Route exact component={EditPost} path={routes.posts.edit} />
           <Route exact component={MyPost} path={routes.posts.myPost} />
+          <Route exact component={PreviewPost} path={routes.posts.preview} />
           <Route exact component={Dashboard} path={routes.dashboard} />
           <Route exact component={Signup} path={routes.auth.signup} />
           <Route exact component={Login} path={routes.auth.login} />

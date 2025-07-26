@@ -53,10 +53,10 @@ const Dashboard = () => {
     <Container className="flex min-h-screen w-full flex-col justify-between space-y-4">
       <div className="flex w-full flex-col space-y-4">
         <div className="flex w-full items-center justify-between">
-          <PageHeader style="h1" title={t("titles.blogPost")}>
+          <PageHeader style="h1" title={t("titles.post.blog")}>
             <Button
               className="bg-indigo-700 hover:bg-indigo-800"
-              label={t("labels.newPost")}
+              label={t("labels.post.new")}
               to={routes.posts.create}
             />
           </PageHeader>

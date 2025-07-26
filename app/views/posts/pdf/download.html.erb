@@ -3,7 +3,7 @@
      <div class="flex w-full flex-col gap-y-2">
        <div class="flex space-x-2">
          <% @post.categories.each do |category| %>
-           <span class="border-none bg-indigo-100 px-2 py-1 text-indigo-800 rounded">
+           <span class="border border-indigo-800 bg-indigo-100 px-2 py-1 text-indigo-800 rounded">
              <%= category.name %>
            </span>
          <% end %>
@@ -14,7 +14,7 @@
              <%= @post.title %>
            </h1>
            <% if @post.status == "draft" %>
-             <span class="my-2 border-none px-2 py-1 text-indigo-800 bg-indigo-100 rounded">
+             <span class="my-2 border border-red-700 px-2 py-1 text-red-700 bg-red-100 rounded">
                <%= @post.status %>
              </span>
            <% end %>

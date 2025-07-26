@@ -41,6 +41,7 @@ const CategoryPane = () => {
           </div>
           {showSearchField && (
             <Input
+              autofocus
               className="flex-grow-0 bg-transparent"
               placeholder={t("placeholders.category")}
               size="medium"

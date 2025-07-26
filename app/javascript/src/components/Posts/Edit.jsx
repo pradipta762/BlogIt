@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import postsApi from "apis/posts";
 import { Container, PageHeader } from "components/commons";
+import dayjs from "dayjs";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useUpdatePost, useShowPost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
@@ -10,6 +11,7 @@ import { Button, Dropdown, Alert } from "neetoui";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
+import usePostPreviewStore from "stores/postPreviewStore";
 
 import ActionDropdownMenu from "./ActionDropdownMenu";
 import { POST_STATUS } from "./constants";
@@ -28,6 +30,8 @@ const EditPost = ({ history }) => {
   const { slug } = useParams();
 
   const { data: post, isLoading: isPostDetailsLoading } = useShowPost(slug);
+
+  const { previewPost, setPreviewPost } = usePostPreviewStore();
 
   const { mutate: updatePost, isLoading: isPostUpdating } = useUpdatePost({
     onSuccess: () => {
@@ -51,12 +55,16 @@ const EditPost = ({ history }) => {
     );
 
   useEffect(() => {
-    if (post) {
+    if (previewPost && previewPost.title) {
+      setTitle(previewPost.title);
+      setSelectedCategories(previewPost.categories || []);
+      setDescription(previewPost.description || "");
+    } else if (post && post.title) {
       setTitle(post.title);
-      setSelectedCategories(post.categories);
-      setDescription(post.description);
+      setSelectedCategories(post.categories || []);
+      setDescription(post.description || "");
     }
-  }, [post]);
+  }, [post, previewPost]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -85,16 +93,30 @@ const EditPost = ({ history }) => {
     history.push(routes.dashboard);
   };
 
+  const updatedAt = dayjs().format("MMM D, YYYY");
+
+  const handlePreview = () => {
+    setPreviewPost({
+      title,
+      description,
+      categories: selectedCategories,
+      status,
+      user: post?.user,
+      updated_at: updatedAt,
+    });
+    history.push(routes.posts.preview.replace(":slug", `${slug}`));
+  };
+
   return (
     <>
       <Container className="w-full">
         <div className="flex flex-col gap-y-8">
-          <PageHeader style="h1" title={t("titles.editPost")}>
+          <PageHeader style="h1" title={t("titles.post.edit")}>
             <div className="flex items-center space-x-4">
               <Button
                 icon={ExternalLink}
                 style="text"
-                to={`/posts/${slug}/show`}
+                onClick={handlePreview}
               />
               <Button
                 label={t("labels.cancel")}
@@ -132,7 +154,7 @@ const EditPost = ({ history }) => {
       <Alert
         isOpen={shouldShowDeleteAlert}
         message={t("messages.deletePost")}
-        title={t("titles.deletePost")}
+        title={t("titles.post.delete")}
         onClose={() => setShouldShowDeleteAlert(false)}
         onSubmit={destroyPost}
       />

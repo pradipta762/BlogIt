@@ -2,12 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { LeftArrow } from "neetoicons";
 import { Avatar, Typography, Button } from "neetoui";
+import { useTranslation } from "react-i18next";
 import { getFromLocalStorage } from "utils/storage";
 
 const UserProfile = ({ handleLogout, name, email }) => {
   const userName = getFromLocalStorage("authUserName");
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const menuRef = useRef();
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleClickOutside = event => {
@@ -35,7 +38,6 @@ const UserProfile = ({ handleLogout, name, email }) => {
         ref={menuRef}
         size="large"
         user={{
-          imageUrl: "https://avatars.githubusercontent.com/u/116185668?v=4",
           name: userName,
         }}
         onClick={toggleMenu}
@@ -46,8 +48,6 @@ const UserProfile = ({ handleLogout, name, email }) => {
             <Avatar
               size="medium"
               user={{
-                imageUrl:
-                  "https://avatars.githubusercontent.com/u/116185668?v=4",
                 name: userName,
               }}
             />
@@ -61,7 +61,7 @@ const UserProfile = ({ handleLogout, name, email }) => {
             className="flex p-3 text-gray-800"
             icon={LeftArrow}
             iconPosition="left"
-            label="Log out"
+            label={t("labels.logOut")}
             size="large"
             style="text"
             onClick={handleLogout}

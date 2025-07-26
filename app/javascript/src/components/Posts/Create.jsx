@@ -59,9 +59,13 @@ const CreatePost = ({ history }) => {
   return (
     <Container className="w-full">
       <div className="flex flex-col gap-y-8">
-        <PageHeader style="h1" title={t("titles.createPost")}>
+        <PageHeader style="h1" title={t("titles.post.create")}>
           <div className="space-x-4">
-            <Button label="Cancel" style="secondary" onClick={handleCancel} />
+            <Button
+              label={t("labels.cancel")}
+              style="secondary"
+              onClick={handleCancel}
+            />
             <ActionDropdownMenu {...{ status, setStatus, handleSubmit }} />
           </div>
         </PageHeader>
