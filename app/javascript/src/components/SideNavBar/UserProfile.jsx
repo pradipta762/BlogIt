@@ -38,7 +38,6 @@ const UserProfile = ({ handleLogout, name, email }) => {
         ref={menuRef}
         size="large"
         user={{
-          imageUrl: "https://avatars.githubusercontent.com/u/116185668?v=4",
           name: userName,
         }}
         onClick={toggleMenu}
@@ -49,8 +48,6 @@ const UserProfile = ({ handleLogout, name, email }) => {
             <Avatar
               size="medium"
               user={{
-                imageUrl:
-                  "https://avatars.githubusercontent.com/u/116185668?v=4",
                 name: userName,
               }}
             />

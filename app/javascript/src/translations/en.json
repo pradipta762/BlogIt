@@ -38,7 +38,12 @@
     "toolTipProps": {
       "downloadPost": "Download post",
       "upvote": "Upvote (+1)",
-      "downvote": "Downvote (-1)"
+      "downvote": "Downvote (-1)",
+      "posts": "Blog posts",
+      "newPost": "New post",
+      "myPosts": "My blog posts",
+      "category": "Categories",
+      "dashboard": "Dashboard"
     }
   },
   "titles": {
@@ -56,7 +61,8 @@
     "results": "<strong>{{totalPosts}} results for {{title}}</strong>"
   },
   "errors": {
-    "noBlogFound": "You have not posted any blogs. If you want to post one, then click below."
+    "noBlogFound": "You have not posted any blogs. If you want to post one, then click below.",
+    "noCategoryFound": "No such category found."
   },
   "placeholders": {
     "title": "Blog Title (Max 125 characters allowed)",

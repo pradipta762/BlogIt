@@ -58,15 +58,17 @@ const ShowPost = () => {
               }
             >
               <div className="space-x-4">
-                <Button
-                  icon={Download}
-                  size="large"
-                  style="text"
-                  tooltipProps={{
-                    content: t("labels.toolTipProps.downloadPost"),
-                  }}
-                  onClick={() => setIsDownloadModalOpen(true)}
-                />
+                {!isDraftPost && (
+                  <Button
+                    icon={Download}
+                    size="large"
+                    style="text"
+                    tooltipProps={{
+                      content: t("labels.toolTipProps.downloadPost"),
+                    }}
+                    onClick={() => setIsDownloadModalOpen(true)}
+                  />
+                )}
                 <Button
                   icon={Edit}
                   size="large"

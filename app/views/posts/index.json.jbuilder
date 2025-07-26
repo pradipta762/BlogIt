@@ -12,7 +12,7 @@ json.posts @posts do |post|
   end
 
   json.net_votes post.net_votes
-  json.user_vote post.votes.find_by(user_id: post.user.id)&.vote_type
+  json.user_vote post.votes.find_by(user_id: @current_user.id)&.vote_type
 end
 
 json.meta do

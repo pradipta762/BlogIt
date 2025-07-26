@@ -25,8 +25,12 @@ const Card = ({
 
   const { t } = useTranslation();
 
-  const handleUpvote = () => vote({ slug, vote_type: "upvote" });
-  const handleDownvote = () => vote({ slug, vote_type: "downvote" });
+  const handleVote = voteType => {
+    vote({
+      slug,
+      vote_type: voteType,
+    });
+  };
 
   return (
     <div className="flex w-full items-center justify-between border-b border-gray-200 py-3">
@@ -59,7 +63,7 @@ const Card = ({
             position: "top",
             content: t("labels.toolTipProps.upvote"),
           }}
-          onClick={handleUpvote}
+          onClick={() => handleVote("upvote")}
         />
         {net_votes}
         <Button
@@ -70,7 +74,7 @@ const Card = ({
             position: "bottom",
             content: t("labels.toolTipProps.downvote"),
           }}
-          onClick={handleDownvote}
+          onClick={() => handleVote("downvote")}
         />
       </div>
     </div>

@@ -1,13 +1,19 @@
 import React from "react";
 
 import classNames from "classnames";
+import { PageLoader } from "components/commons";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
+import { NoData } from "neetoui";
+import { isEmpty } from "ramda";
+import { useTranslation } from "react-i18next";
 import useCategoryStore from "stores/useCategoryStore";
 
 const List = ({ searchTerm }) => {
-  const { data: categories = [] } = useFetchCategories();
+  const { data: categories = [], isLoading } = useFetchCategories();
 
   const { toggleSelect, isSelectedCategory } = useCategoryStore();
+
+  const { t } = useTranslation();
 
   const handleCategorySelect = category => {
     toggleSelect(category);
@@ -16,6 +22,16 @@ const List = ({ searchTerm }) => {
   const filteredCategories = categories.filter(category =>
     category.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if (isEmpty(categories) || isEmpty(filteredCategories)) {
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <NoData title={t("errors.noCategoryFound")} />
+      </div>
+    );
+  }
+
+  if (isLoading) return <PageLoader />;
 
   return (
     <ul className="mt-4 flex flex-col space-y-2">

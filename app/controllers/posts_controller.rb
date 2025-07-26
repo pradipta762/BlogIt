@@ -11,6 +11,7 @@ class PostsController < ApplicationController
       .order(created_at: :desc)
       .page(params[:page]&.to_i || Constants::DEFAULT_PAGE_NUMBER)
       .per(Constants::DEFAULT_PAGE_SIZE)
+    @current_user = current_user
     render :index
   end
 
