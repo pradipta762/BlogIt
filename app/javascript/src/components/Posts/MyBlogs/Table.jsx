@@ -35,7 +35,7 @@ const PostTable = ({
     title: (
       <Tooltip content={post.title} position="top">
         <Link
-          className="truncate font-semibold text-indigo-700"
+          className="inline-block w-[350px] truncate font-semibold text-indigo-700"
           to={`/posts/${post.slug}/edit`}
         >
           {post.title}
