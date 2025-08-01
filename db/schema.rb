@@ -71,8 +71,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_25_100602) do
     t.datetime "updated_at", null: false
     t.string "slug", null: false
     t.string "status", default: "publish", null: false
-    t.bigint "user_id", null: false
-    t.bigint "organization_id", null: false
+    t.bigint "user_id"
+    t.bigint "organization_id"
     t.index ["organization_id"], name: "index_posts_on_organization_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
