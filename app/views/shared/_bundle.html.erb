@@ -9,6 +9,6 @@
   <%= javascript_include_tag "http://localhost:8000/@vite/client", type: "module" %>
   <%= javascript_include_tag "http://localhost:8000/#{entrypoint}.js", type: "module" %>
 <% else %>
-  <%= stylesheet_link_tag "#{entrypoint}", media: "all" %>
-  <%= javascript_include_tag "#{entrypoint}", type: "module", crossorigin: "anonymous" %>
+  <%= vite_client_tag %>
+  <%= vite_javascript_tag entrypoint, crossorigin: "anonymous" %>
 <% end %>
