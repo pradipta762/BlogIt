@@ -9,7 +9,11 @@
 
 # Ignore all logfiles
 /log/*
-/tmp
+/tmp/*
+/tmp/pids/*
+!/tmp/pids/.keep
+!/tmp/pids
+!/tmp/.keep
 /db/backups
 /public/uploads
 *.DS_Store
