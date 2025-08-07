@@ -46,6 +46,11 @@
     "build": "node esbuild.config.js",
     "dev": "vite"
   },
+  "engines": {
+    "node": "22.13.1",
+    "npm": "10.9.2",
+    "yarn": "1.22.22"
+  },
   "dependencies": {
     "@babel/core": "^7.19.1",
     "@babel/plugin-transform-react-constant-elements": "^7.25.9",
